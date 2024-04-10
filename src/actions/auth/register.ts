@@ -1,5 +1,7 @@
 "use server"
 
+import bcrypt from "bcrypt"
+
 import db from "@/modules/db"
 
 import { isEmail } from "@/utils/Validators"
@@ -36,8 +38,14 @@ export async function registerAction(formData: FormData) {
 		}
 
 		try {
+			const encryptedPassword = await bcrypt.hash(formData.get("password") as string, 10)
+
 			const newUser = await db.user.create({
-				data: user,
+				data: {
+					name: user.name,
+					email: user.email,
+					password: encryptedPassword,
+				},
 			})
 
 			return {
