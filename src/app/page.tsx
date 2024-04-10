@@ -22,6 +22,12 @@ export default function Home() {
 				>
 					Register
 				</Link>
+				<Link
+					className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all"
+					href="/profile"
+				>
+					Private page
+				</Link>
 			</div>
 		</main>
 	)
