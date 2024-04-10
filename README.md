@@ -1,36 +1,68 @@
+# Fullstack next template
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Introduction
+
+With this template, you can start a new fullstack NextJS project, including middleware authentication and a database connection.
+
+Everything is set up for you to start coding right away.
+
+## Technologies
+
+-   TypeScript 5.0 - JavaScript with syntax for types.
+-   Tailwind CSS 3.3 - A utility-first CSS framework for rapidly building custom designs.
+-   Prisma 5.12 - A modern database toolkit for TypeScript & Node.js.
+-   PostgreSQL 15 Alpine - A powerful, open-source object-relational database system.
+-   Docker 20.10 - A platform for building, sharing, and running applications with containers.
 
 ## Getting Started
 
-First, run the development server:
+> To use this template, you need to have Docker and Docker Compose installed on your machine. Check the [official documentation](https://docs.docker.com/get-docker/) to install it.
+
+To get started, you can use the `create-next-app` command to create a new project from this template.
+
+```bash
+npx create-next-app@latest --example https://github.com/igorroc/fullstack-next-template
+```
+
+Follow the default instructions to create your project.
+
+Once the project is created, you can navigate to your project's folder and install the dependencies.
+
+```bash
+cd your_project_name
+npm install
+```
+
+After that, you need to create a `.env` file in the root of the project with the following content:
+
+```bash
+POSTGRES_PRISMA_URL="postgresql://postgres@localhost:5432/your_database_name"
+POSTGRES_URL_NON_POOLING="postgresql://postgres@localhost:5432/your_database_name"
+AUTHENTICATION_SECRET_KEY="ANY_RANDOM_STRING"
+```
+
+Make sure to replace `your_database_name` with the name of your database, and also use the same name in the `docker-compose.yml` file.
+
+Now you can start the development server with the following command:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To deploy your project on Vercel, first you need to make sure you don't already have a project that is using the `storage` feature. Vercel doesn't allow multiple storages in one account.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you don't have a project with storage, you can create a new project on Vercel using the dashboard or the CLI.
+
+```bash
+vercel
+```
+
+Follow the instructions to deploy your project.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
