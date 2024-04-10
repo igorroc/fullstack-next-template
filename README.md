@@ -10,11 +10,11 @@ Everything is set up for you to start coding right away.
 
 ## Technologies
 
--   TypeScript 5.0 - JavaScript with syntax for types.
--   Tailwind CSS 3.3 - A utility-first CSS framework for rapidly building custom designs.
--   Prisma 5.12 - A modern database toolkit for TypeScript & Node.js.
--   PostgreSQL 15 Alpine - A powerful, open-source object-relational database system.
--   Docker 20.10 - A platform for building, sharing, and running applications with containers.
+- TypeScript 5.0 - JavaScript with syntax for types.
+- Tailwind CSS 3.3 - A utility-first CSS framework for rapidly building custom designs.
+- Prisma 5.12 - A modern database toolkit for TypeScript & Node.js.
+- PostgreSQL 15 Alpine - A powerful, open-source object-relational database system.
+- Docker 20.10 - A platform for building, sharing, and running applications with containers.
 
 ## Getting Started
 
@@ -44,6 +44,20 @@ AUTHENTICATION_SECRET_KEY="ANY_RANDOM_STRING"
 ```
 
 Make sure to replace `your_database_name` with the name of your database, and also use the same name in the `docker-compose.yml` file.
+
+Now you can start the database with the following command:
+
+```bash
+npm run compose:up
+```
+
+This command will start a PostgreSQL database in a Docker container.
+
+After that, you need to run the following command to create the database schema:
+
+```bash
+npm run migrate
+```
 
 Now you can start the development server with the following command:
 
