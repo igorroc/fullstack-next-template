@@ -10,11 +10,11 @@ Everything is set up for you to start coding right away.
 
 ## Technologies
 
-- TypeScript 5.0 - JavaScript with syntax for types.
-- Tailwind CSS 3.3 - A utility-first CSS framework for rapidly building custom designs.
-- Prisma 5.12 - A modern database toolkit for TypeScript & Node.js.
-- PostgreSQL 15 Alpine - A powerful, open-source object-relational database system.
-- Docker 20.10 - A platform for building, sharing, and running applications with containers.
+-   TypeScript 5.0 - JavaScript with syntax for types.
+-   Tailwind CSS 3.3 - A utility-first CSS framework for rapidly building custom designs.
+-   Prisma 5.12 - A modern database toolkit for TypeScript & Node.js.
+-   PostgreSQL 15 Alpine - A powerful, open-source object-relational database system.
+-   Docker 20.10 - A platform for building, sharing, and running applications with containers.
 
 ## Getting Started
 
@@ -38,12 +38,15 @@ npm install
 After that, you need to create a `.env` file in the root of the project with the following content:
 
 ```bash
-POSTGRES_PRISMA_URL="postgresql://postgres@localhost:5432/your_database_name"
-POSTGRES_URL_NON_POOLING="postgresql://postgres@localhost:5432/your_database_name"
-AUTHENTICATION_SECRET_KEY="ANY_RANDOM_STRING"
+DATABASE_DB="your_database_name"
+DATABASE_USER="postgres"
+DATABASE_PASSWORD="custom_db_password"
+
+POSTGRES_PRISMA_URL="postgresql://postgres:custom_db_password@localhost:5432/your_database_name"
+AUTHENTICATION_SECRET_KEY="random_hash_1234567890ABCDE"
 ```
 
-Make sure to replace `your_database_name` with the name of your database, and also use the same name in the `docker-compose.yml` file.
+Make sure to also change the `POSTGRES_PRISMA_URL` with the correct values.
 
 Now you can start the database with the following command:
 

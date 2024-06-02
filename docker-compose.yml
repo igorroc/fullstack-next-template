@@ -4,5 +4,6 @@ services:
         ports:
             - 5432:5432
         environment:
-            POSTGRES_DB: your_database_name
-            POSTGRES_HOST_AUTH_METHOD: trust
+            POSTGRES_DB: $DATABASE_DB
+            POSTGRES_USER: $DATABASE_USER
+            POSTGRES_PASSWORD: $DATABASE_PASSWORD

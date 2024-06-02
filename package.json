@@ -1,40 +1,40 @@
 {
-  "name": "fullstack-next-template",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "compose:up": "docker-compose up -d",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "migrate": "npx prisma migrate dev && npx prisma generate",
-    "migrate:reset": "npx prisma migrate reset --force",
-    "migrate:create-only": "npx prisma migrate dev --create-only",
-    "prisma:studio": "npx prisma studio"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.12.1",
-    "@vercel/postgres": "^0.8.0",
-    "bcrypt": "^5.1.1",
-    "jose": "^5.2.4",
-    "next": "14.1.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-toastify": "^10.0.5"
-  },
-  "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4",
-    "postcss": "^8",
-    "prisma": "^5.12.1",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+	"name": "fullstack-next-template",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"compose:up": "docker compose up -d",
+		"vercel-build": "prisma generate && prisma migrate deploy && next build",
+		"migrate": "npx prisma migrate dev && npx prisma generate",
+		"migrate:reset": "npx prisma migrate reset --force",
+		"migrate:create-only": "npx prisma migrate dev --create-only",
+		"prisma:studio": "npx prisma studio"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.12.1",
+		"@vercel/postgres": "^0.8.0",
+		"bcrypt": "^5.1.1",
+		"jose": "^5.2.4",
+		"next": "14.1.4",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-toastify": "^10.0.5"
+	},
+	"devDependencies": {
+		"@types/bcrypt": "^5.0.2",
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"autoprefixer": "^10.0.1",
+		"eslint": "^8",
+		"eslint-config-next": "14.1.4",
+		"postcss": "^8",
+		"prisma": "^5.12.1",
+		"tailwindcss": "^3.3.0",
+		"typescript": "^5"
+	}
 }
