@@ -5,7 +5,7 @@ export default function Home() {
 		<main className="flex min-h-dvh flex-col items-center justify-center p-24">
 			<h1 className="text-2xl font-bold">Welcome</h1>
 			<p>
-				To the default page of the app. You can start by editing the{" "}
+				This is the default page of your app. You can start by editing{" "}
 				<code>src/app/page.tsx</code> file.
 			</p>
 
