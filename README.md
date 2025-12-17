@@ -4,13 +4,22 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 
 ## Features
 
+### Core Features
 - **Next.js 16** - The latest version of Next.js with App Router
-- **TypeScript** - Type-safe development
-- **Authentication** - Complete auth system with middleware protection
+- **TypeScript** - Full type-safe development
+- **Clean Architecture** - Well-organized folder structure following best practices
+- **Authentication** - Complete auth system with middleware protection and automatic login after registration
 - **Database** - PostgreSQL with Prisma ORM
 - **UI Components** - NextUI (based on Tailwind CSS) for modern, accessible components
 - **Docker** - Containerized PostgreSQL database
-- **Form Handling** - React Toastify for notifications
+- **Form Handling** - Server Actions with loading states and error handling
+
+### Implemented Pages
+- **Home Page** - Welcome page with navigation to auth pages
+- **Login** - User authentication with automatic redirect to profile
+- **Register** - User registration with automatic login
+- **Profile** - Protected page showing user info and list of all registered users
+- **Logout** - Secure logout with redirect to home
 
 ## Technologies
 
@@ -185,6 +194,50 @@ The template uses NextUI components with Tailwind CSS. You can customize:
 - **Theme**: Edit `tailwind.config.ts` to modify colors, fonts, etc.
 - **NextUI**: Configure NextUI theme in the same file
 - **Components**: All pages use NextUI components which are fully customizable
+- **Dark Mode**: Built-in dark mode support (toggle in `tailwind.config.ts`)
+
+### Adding New Features
+
+The project structure makes it easy to add new features:
+
+1. **Create a new feature** in `src/features/your-feature/`:
+```typescript
+// src/features/products/get-products.ts
+"use server"
+import db from "@/lib/db"
+
+export async function getProducts() {
+  return await db.product.findMany()
+}
+```
+
+2. **Add exports** in `src/features/products/index.ts`:
+```typescript
+export { getProducts } from "./get-products"
+```
+
+3. **Create UI components** in `src/components/products/`:
+```typescript
+// src/components/products/product-list.tsx
+"use client"
+import { Card } from "@nextui-org/react"
+
+export function ProductList({ products }) {
+  // Your component logic
+}
+```
+
+4. **Use in pages** with clean imports:
+```typescript
+// src/app/products/page.tsx
+import { getProducts } from "@/features/products"
+import { ProductList } from "@/components/products"
+
+export default async function ProductsPage() {
+  const products = await getProducts()
+  return <ProductList products={products} />
+}
+```
 
 ### Database Schema
 
@@ -193,6 +246,25 @@ Modify `prisma/schema.prisma` to add or change models, then run:
 ```bash
 npm run migrate:create-only  # Create migration without applying
 npm run migrate              # Apply migrations
+```
+
+### Import Examples
+
+The clean architecture allows for intuitive imports:
+
+```typescript
+// Features (Server Actions)
+import { loginAction, registerAction } from "@/features/auth"
+import { getAllUsers } from "@/features/users"
+
+// Components
+import { LoginForm, RegisterForm } from "@/components/auth"
+import { ProfileContent } from "@/components/profile"
+
+// Utilities
+import { isEmail } from "@/lib/utils"
+import { getUserBySession } from "@/lib/auth"
+import db from "@/lib/db"
 ```
 
 ## Contributing

@@ -4,13 +4,22 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 
 ## Funcionalidades
 
+### Funcionalidades Principais
 - **Next.js 16** - A versão mais recente do Next.js com App Router
-- **TypeScript** - Desenvolvimento com type-safe
-- **Autenticação** - Sistema completo de autenticação com proteção via middleware
+- **TypeScript** - Desenvolvimento totalmente type-safe
+- **Clean Architecture** - Estrutura de pastas bem organizada seguindo as melhores práticas
+- **Autenticação** - Sistema completo de autenticação com proteção via middleware e login automático após registro
 - **Banco de Dados** - PostgreSQL com Prisma ORM
 - **Componentes UI** - NextUI (baseado em Tailwind CSS) para componentes modernos e acessíveis
 - **Docker** - Banco de dados PostgreSQL containerizado
-- **Manipulação de Formulários** - React Toastify para notificações
+- **Manipulação de Formulários** - Server Actions com estados de loading e tratamento de erros
+
+### Páginas Implementadas
+- **Página Inicial** - Página de boas-vindas com navegação para páginas de autenticação
+- **Login** - Autenticação de usuário com redirecionamento automático para o perfil
+- **Registro** - Registro de usuário com login automático
+- **Perfil** - Página protegida mostrando informações do usuário e lista de todos os usuários registrados
+- **Logout** - Logout seguro com redirecionamento para a home
 
 ## Tecnologias
 
@@ -185,6 +194,50 @@ O template usa componentes NextUI com Tailwind CSS. Você pode customizar:
 - **Tema**: Edite `tailwind.config.ts` para modificar cores, fontes, etc.
 - **NextUI**: Configure o tema do NextUI no mesmo arquivo
 - **Componentes**: Todas as páginas usam componentes NextUI que são totalmente customizáveis
+- **Dark Mode**: Suporte integrado para modo escuro (ative em `tailwind.config.ts`)
+
+### Adicionando Novas Features
+
+A estrutura do projeto facilita a adição de novas funcionalidades:
+
+1. **Crie uma nova feature** em `src/features/sua-feature/`:
+```typescript
+// src/features/produtos/get-produtos.ts
+"use server"
+import db from "@/lib/db"
+
+export async function getProdutos() {
+  return await db.produto.findMany()
+}
+```
+
+2. **Adicione exports** em `src/features/produtos/index.ts`:
+```typescript
+export { getProdutos } from "./get-produtos"
+```
+
+3. **Crie componentes UI** em `src/components/produtos/`:
+```typescript
+// src/components/produtos/lista-produtos.tsx
+"use client"
+import { Card } from "@nextui-org/react"
+
+export function ListaProdutos({ produtos }) {
+  // Lógica do componente
+}
+```
+
+4. **Use nas páginas** com imports limpos:
+```typescript
+// src/app/produtos/page.tsx
+import { getProdutos } from "@/features/produtos"
+import { ListaProdutos } from "@/components/produtos"
+
+export default async function PaginaProdutos() {
+  const produtos = await getProdutos()
+  return <ListaProdutos produtos={produtos} />
+}
+```
 
 ### Schema do Banco de Dados
 
@@ -193,6 +246,25 @@ Modifique `prisma/schema.prisma` para adicionar ou alterar models, depois execut
 ```bash
 npm run migrate:create-only  # Cria migração sem aplicar
 npm run migrate              # Aplica as migrações
+```
+
+### Exemplos de Imports
+
+A clean architecture permite imports intuitivos:
+
+```typescript
+// Features (Server Actions)
+import { loginAction, registerAction } from "@/features/auth"
+import { getAllUsers } from "@/features/users"
+
+// Componentes
+import { LoginForm, RegisterForm } from "@/components/auth"
+import { ProfileContent } from "@/components/profile"
+
+// Utilitários
+import { isEmail } from "@/lib/utils"
+import { getUserBySession } from "@/lib/auth"
+import db from "@/lib/db"
 ```
 
 ## Contribuindo
