@@ -1,6 +1,7 @@
 "use server"
 
 import bcrypt from "bcrypt"
+import { redirect } from "next/navigation"
 
 import db from "@/modules/db"
 
@@ -47,13 +48,11 @@ export async function loginAction(formData: FormData) {
 		}
 
 		await authenticateLogin(existingUser)
-
-		return {
-			user: existingUser,
-		}
 	} catch (e) {
 		return {
 			error: "Something went wrong. Please try again later.",
 		}
 	}
+
+	redirect("/profile")
 }

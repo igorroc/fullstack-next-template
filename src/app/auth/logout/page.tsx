@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 
@@ -8,13 +8,22 @@ import { logoutAction } from "@/actions/auth/logout"
 
 export default function Logout() {
 	const router = useRouter()
+	const hasLoggedOut = useRef(false)
+
 	useEffect(() => {
+		if (hasLoggedOut.current) return
+
+		hasLoggedOut.current = true
+
 		;(async () => {
 			const res = await logoutAction()
-			if ("error" in res) return toast.error(res.error)
+			if ("error" in res) {
+				toast.error(res.error)
+				return
+			}
 
-			router.push("/")
 			toast.success("User logged out successfully")
+			router.push("/")
 		})()
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps

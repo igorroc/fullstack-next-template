@@ -3,15 +3,24 @@
 import { Input, Button } from "@nextui-org/react"
 import { toast } from "react-toastify"
 import { loginAction } from "@/actions/auth/login"
+import { useState } from "react"
 
 export default function Form() {
-	async function loginClient(formData: FormData) {
-		const res = await loginAction(formData)
+	const [isLoading, setIsLoading] = useState(false)
 
-		if ("error" in res) {
-			toast.error(res.error)
-		} else {
-			toast.success("User logged in successfully")
+	async function loginClient(formData: FormData) {
+		setIsLoading(true)
+		try {
+			const res = await loginAction(formData)
+
+			if (res && "error" in res) {
+				toast.error(res.error)
+				setIsLoading(false)
+			}
+			// Se não houver erro, o redirect() na action vai redirecionar automaticamente
+		} catch (error) {
+			// O redirect() lança uma exceção que é capturada pelo Next.js
+			// Não precisa fazer nada aqui
 		}
 	}
 
@@ -24,6 +33,7 @@ export default function Form() {
 				name="email"
 				isRequired
 				variant="bordered"
+				isDisabled={isLoading}
 			/>
 			<Input
 				type="password"
@@ -32,8 +42,15 @@ export default function Form() {
 				name="password"
 				isRequired
 				variant="bordered"
+				isDisabled={isLoading}
 			/>
-			<Button type="submit" color="primary" size="lg" className="mt-2">
+			<Button
+				type="submit"
+				color="primary"
+				size="lg"
+				className="mt-2"
+				isLoading={isLoading}
+			>
 				Login
 			</Button>
 		</form>

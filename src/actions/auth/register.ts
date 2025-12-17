@@ -1,10 +1,12 @@
 "use server"
 
 import bcrypt from "bcrypt"
+import { redirect } from "next/navigation"
 
 import db from "@/modules/db"
 
 import { isEmail } from "@/utils/Validators"
+import { authenticateLogin } from "@/modules/auth"
 
 export async function registerAction(formData: FormData) {
 	const user = {
@@ -48,9 +50,7 @@ export async function registerAction(formData: FormData) {
 				},
 			})
 
-			return {
-				user: newUser,
-			}
+			await authenticateLogin(newUser)
 		} catch (e) {
 			return {
 				error: "Error creating user. Please try again later.",
@@ -61,4 +61,6 @@ export async function registerAction(formData: FormData) {
 			error: "Something went wrong. Please try again later.",
 		}
 	}
+
+	redirect("/profile")
 }
