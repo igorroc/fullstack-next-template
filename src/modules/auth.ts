@@ -29,14 +29,17 @@ export async function decrypt(input: string): Promise<JWTPayload | null> {
 export async function authenticateLogin(user: User) {
 	const session = await encrypt({ user })
 
-	cookies().set("session", session, { httpOnly: true })
+	const awaitedCookies = await cookies()
+	awaitedCookies.set("session", session, { httpOnly: true })
 }
 export async function authenticateLogout() {
-	cookies().set("session", "", { httpOnly: true, expires: new Date(0) })
+	const awaitedCookies = await cookies()
+	awaitedCookies.set("session", "", { httpOnly: true, expires: new Date(0) })
 }
 
 export async function getSession() {
-	const session = cookies().get("session")
+	const awaitedCookies = await cookies()
+	const session = awaitedCookies.get("session")
 	if (!session || !session.value) return null
 	const payload = await decrypt(session.value)
 
