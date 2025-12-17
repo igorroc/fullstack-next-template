@@ -1,0 +1,184 @@
+# Template Fullstack Next.js
+
+Um template moderno e pronto para produção de Next.js fullstack com autenticação, integração de banco de dados e componentes de UI bonitos.
+
+## Funcionalidades
+
+- **Next.js 16** - A versão mais recente do Next.js com App Router
+- **TypeScript** - Desenvolvimento com type-safe
+- **Autenticação** - Sistema completo de autenticação com proteção via middleware
+- **Banco de Dados** - PostgreSQL com Prisma ORM
+- **Componentes UI** - NextUI (baseado em Tailwind CSS) para componentes modernos e acessíveis
+- **Docker** - Banco de dados PostgreSQL containerizado
+- **Manipulação de Formulários** - React Toastify para notificações
+
+## Tecnologias
+
+- **Next.js 16** - Framework React para produção
+- **TypeScript 5** - JavaScript com sintaxe para tipos
+- **Tailwind CSS 3.3** - Framework CSS utility-first
+- **NextUI** - Biblioteca de UI React bonita, rápida e moderna
+- **Prisma 5.12** - ORM de nova geração para TypeScript & Node.js
+- **PostgreSQL 15** - Banco de dados relacional poderoso e open-source
+- **Docker** - Plataforma para aplicações containerizadas
+- **bcrypt** - Hash de senhas
+- **Jose** - Implementação de JWT
+
+## Começando
+
+### Pré-requisitos
+
+- Node.js 18+ ou Bun
+- Docker e Docker Compose
+- Git
+
+### Instalação
+
+1. **Use este template** para criar um novo repositório ou clone-o:
+
+```bash
+git clone https://github.com/igorroc/fullstack-next-template.git meu-projeto
+cd meu-projeto
+```
+
+2. **Instale as dependências:**
+
+```bash
+npm install
+# ou
+bun install
+```
+
+3. **Configure as variáveis de ambiente:**
+
+Crie um arquivo `.env` no diretório raiz (você pode copiar do `.env.example`):
+
+```env
+DATABASE_DB="nome_do_seu_banco"
+DATABASE_USER="postgres"
+DATABASE_PASSWORD="senha_personalizada_db"
+
+POSTGRES_PRISMA_URL="postgresql://postgres:senha_personalizada_db@localhost:5432/nome_do_seu_banco"
+AUTHENTICATION_SECRET_KEY="hash_aleatorio_1234567890ABCDE"
+```
+
+Substitua os valores pelos seus próprios:
+- `DATABASE_DB`: Escolha um nome para seu banco de dados
+- `DATABASE_PASSWORD`: Defina uma senha segura
+- `AUTHENTICATION_SECRET_KEY`: Gere uma string aleatória segura
+
+4. **Inicie o banco de dados PostgreSQL:**
+
+```bash
+npm run compose:up
+```
+
+Isso iniciará um container PostgreSQL usando Docker Compose.
+
+5. **Execute as migrações do banco de dados:**
+
+```bash
+npm run migrate
+```
+
+Isso criará o schema do banco de dados e gerará o Prisma Client.
+
+6. **Inicie o servidor de desenvolvimento:**
+
+```bash
+npm run dev
+```
+
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver seu app.
+
+## Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Faz build para produção
+- `npm run start` - Inicia o servidor de produção
+- `npm run lint` - Executa o ESLint
+- `npm run ts-check` - Verifica tipos sem emitir arquivos
+- `npm run compose:up` - Inicia o container PostgreSQL
+- `npm run migrate` - Executa as migrações do Prisma
+- `npm run migrate:reset` - Reseta o banco de dados e executa as migrações
+- `npm run prisma:studio` - Abre o Prisma Studio (GUI do banco de dados)
+
+## Estrutura do Projeto
+
+```
+├── src/
+│   ├── app/                # Diretório app do Next.js
+│   │   ├── auth/          # Páginas de autenticação
+│   │   ├── profile/       # Página de perfil protegida
+│   │   ├── layout.tsx     # Layout raiz
+│   │   ├── page.tsx       # Página inicial
+│   │   └── providers.tsx  # Providers do lado do cliente
+│   ├── actions/           # Server actions
+│   ├── modules/           # Módulos principais (auth, db)
+│   └── utils/             # Funções utilitárias
+├── prisma/
+│   └── schema.prisma      # Schema do banco de dados
+└── public/                # Arquivos estáticos
+```
+
+## Autenticação
+
+O template inclui um sistema completo de autenticação:
+
+- **Registro** - `/auth/register`
+- **Login** - `/auth/login`
+- **Logout** - `/auth/logout`
+- **Rotas Protegidas** - Usando middleware do Next.js
+- **Gerenciamento de Sessão** - Sessões baseadas em JWT
+
+## Banco de Dados
+
+O template usa Prisma com PostgreSQL:
+
+- Edite `prisma/schema.prisma` para modificar seu schema de banco de dados
+- Execute `npm run migrate` para aplicar as mudanças
+- Use `npm run prisma:studio` para visualizar seus dados
+
+## Deploy na Vercel
+
+A maneira mais fácil de fazer deploy deste template é usando a [Vercel](https://vercel.com):
+
+1. Faça push do seu código para um repositório Git (GitHub, GitLab ou Bitbucket)
+2. Importe seu repositório na Vercel
+3. Configure as variáveis de ambiente (as mesmas do `.env`)
+4. Para o banco de dados, você precisará configurar uma instância PostgreSQL (Vercel Postgres, Railway, Supabase, etc.)
+5. Atualize `POSTGRES_PRISMA_URL` com a URL do seu banco de dados de produção
+6. Faça o deploy!
+
+Alternativamente, use a CLI da Vercel:
+
+```bash
+vercel
+```
+
+## Customização
+
+### Estilização
+
+O template usa componentes NextUI com Tailwind CSS. Você pode customizar:
+
+- **Tema**: Edite `tailwind.config.ts` para modificar cores, fontes, etc.
+- **NextUI**: Configure o tema do NextUI no mesmo arquivo
+- **Componentes**: Todas as páginas usam componentes NextUI que são totalmente customizáveis
+
+### Schema do Banco de Dados
+
+Modifique `prisma/schema.prisma` para adicionar ou alterar models, depois execute:
+
+```bash
+npm run migrate:create-only  # Cria migração sem aplicar
+npm run migrate              # Aplica as migrações
+```
+
+## Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+## Licença
+
+Este projeto é open source e está disponível sob a [Licença MIT](LICENSE).

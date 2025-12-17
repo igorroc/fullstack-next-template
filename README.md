@@ -1,43 +1,59 @@
-# Fullstack next template
+# Fullstack Next.js Template
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+A modern, production-ready fullstack Next.js template with authentication, database integration, and beautiful UI components.
 
-## Introduction
+## Features
 
-With this template, you can start a new fullstack NextJS project, including middleware authentication and a database connection.
-
-Everything is set up for you to start coding right away.
+- **Next.js 16** - The latest version of Next.js with App Router
+- **TypeScript** - Type-safe development
+- **Authentication** - Complete auth system with middleware protection
+- **Database** - PostgreSQL with Prisma ORM
+- **UI Components** - NextUI (based on Tailwind CSS) for modern, accessible components
+- **Docker** - Containerized PostgreSQL database
+- **Form Handling** - React Toastify for notifications
 
 ## Technologies
 
--   TypeScript 5.0 - JavaScript with syntax for types.
--   Tailwind CSS 3.3 - A utility-first CSS framework for rapidly building custom designs.
--   Prisma 5.12 - A modern database toolkit for TypeScript & Node.js.
--   PostgreSQL 15 Alpine - A powerful, open-source object-relational database system.
--   Docker 20.10 - A platform for building, sharing, and running applications with containers.
+- **Next.js 16** - React framework for production
+- **TypeScript 5** - JavaScript with syntax for types
+- **Tailwind CSS 3.3** - Utility-first CSS framework
+- **NextUI** - Beautiful, fast and modern React UI library
+- **Prisma 5.12** - Next-generation ORM for TypeScript & Node.js
+- **PostgreSQL 15** - Powerful, open-source relational database
+- **Docker** - Platform for containerized applications
+- **bcrypt** - Password hashing
+- **Jose** - JWT implementation
 
 ## Getting Started
 
-> To use this template, you need to have Docker and Docker Compose installed on your machine. Check the [official documentation](https://docs.docker.com/get-docker/) to install it.
+### Prerequisites
 
-To get started, you can use the `create-next-app` command to create a new project from this template.
+- Node.js 18+ or Bun
+- Docker and Docker Compose
+- Git
+
+### Installation
+
+1. **Use this template** to create a new repository or clone it:
 
 ```bash
-npx create-next-app@latest --example https://github.com/igorroc/fullstack-next-template
+git clone https://github.com/igorroc/fullstack-next-template.git my-project
+cd my-project
 ```
 
-Follow the default instructions to create your project.
-
-Once the project is created, you can navigate to your project's folder and install the dependencies.
+2. **Install dependencies:**
 
 ```bash
-cd your_project_name
 npm install
+# or
+bun install
 ```
 
-After that, you need to create a `.env` file in the root of the project with the following content:
+3. **Set up environment variables:**
 
-```bash
+Create a `.env` file in the root directory (you can copy from `.env.example`):
+
+```env
 DATABASE_DB="your_database_name"
 DATABASE_USER="postgres"
 DATABASE_PASSWORD="custom_db_password"
@@ -46,39 +62,122 @@ POSTGRES_PRISMA_URL="postgresql://postgres:custom_db_password@localhost:5432/you
 AUTHENTICATION_SECRET_KEY="random_hash_1234567890ABCDE"
 ```
 
-Make sure to also change the `POSTGRES_PRISMA_URL` with the correct values.
+Replace the values with your own:
+- `DATABASE_DB`: Choose a name for your database
+- `DATABASE_PASSWORD`: Set a secure password
+- `AUTHENTICATION_SECRET_KEY`: Generate a random secure string
 
-Now you can start the database with the following command:
+4. **Start the PostgreSQL database:**
 
 ```bash
 npm run compose:up
 ```
 
-This command will start a PostgreSQL database in a Docker container.
+This will start a PostgreSQL container using Docker Compose.
 
-After that, you need to run the following command to create the database schema:
+5. **Run database migrations:**
 
 ```bash
 npm run migrate
 ```
 
-Now you can start the development server with the following command:
+This will create the database schema and generate Prisma Client.
+
+6. **Start the development server:**
 
 ```bash
 npm run dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) in your browser to see your app.
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run ts-check` - Type check without emitting files
+- `npm run compose:up` - Start PostgreSQL container
+- `npm run migrate` - Run Prisma migrations
+- `npm run migrate:reset` - Reset database and run migrations
+- `npm run prisma:studio` - Open Prisma Studio (database GUI)
+
+## Project Structure
+
+```
+├── src/
+│   ├── app/                # Next.js app directory
+│   │   ├── auth/          # Authentication pages
+│   │   ├── profile/       # Protected profile page
+│   │   ├── layout.tsx     # Root layout
+│   │   ├── page.tsx       # Home page
+│   │   └── providers.tsx  # Client-side providers
+│   ├── actions/           # Server actions
+│   ├── modules/           # Core modules (auth, db)
+│   └── utils/             # Utility functions
+├── prisma/
+│   └── schema.prisma      # Database schema
+└── public/                # Static files
+```
+
+## Authentication
+
+The template includes a complete authentication system:
+
+- **Registration** - `/auth/register`
+- **Login** - `/auth/login`
+- **Logout** - `/auth/logout`
+- **Protected Routes** - Using Next.js middleware
+- **Session Management** - JWT-based sessions
+
+## Database
+
+The template uses Prisma with PostgreSQL:
+
+- Edit `prisma/schema.prisma` to modify your database schema
+- Run `npm run migrate` to apply changes
+- Use `npm run prisma:studio` to visualize your data
+
 ## Deploy on Vercel
 
-To deploy your project on Vercel, first you need to make sure you don't already have a project that is using the `storage` feature. Vercel doesn't allow multiple storages in one account.
+The easiest way to deploy this template is using [Vercel](https://vercel.com):
 
-If you don't have a project with storage, you can create a new project on Vercel using the dashboard or the CLI.
+1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
+2. Import your repository on Vercel
+3. Configure environment variables (same as in `.env`)
+4. For the database, you'll need to set up a PostgreSQL instance (Vercel Postgres, Railway, Supabase, etc.)
+5. Update `POSTGRES_PRISMA_URL` with your production database URL
+6. Deploy!
+
+Alternatively, use the Vercel CLI:
 
 ```bash
 vercel
 ```
 
-Follow the instructions to deploy your project.
+## Customization
+
+### Styling
+
+The template uses NextUI components with Tailwind CSS. You can customize:
+
+- **Theme**: Edit `tailwind.config.ts` to modify colors, fonts, etc.
+- **NextUI**: Configure NextUI theme in the same file
+- **Components**: All pages use NextUI components which are fully customizable
+
+### Database Schema
+
+Modify `prisma/schema.prisma` to add or change models, then run:
+
+```bash
+npm run migrate:create-only  # Create migration without applying
+npm run migrate              # Apply migrations
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## License
 
