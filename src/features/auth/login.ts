@@ -3,10 +3,9 @@
 import bcrypt from "bcrypt"
 import { redirect } from "next/navigation"
 
-import db from "@/modules/db"
-
-import { isEmail } from "@/utils/Validators"
-import { authenticateLogin } from "@/modules/auth"
+import db from "@/lib/db"
+import { isEmail } from "@/lib/utils/validators"
+import { authenticateLogin } from "@/lib/auth"
 
 export async function loginAction(formData: FormData) {
 	const user = {

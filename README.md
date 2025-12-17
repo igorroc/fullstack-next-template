@@ -105,21 +105,41 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see your 
 
 ## Project Structure
 
+This project follows clean architecture principles with a well-organized structure:
+
 ```
 ├── src/
-│   ├── app/                # Next.js app directory
-│   │   ├── auth/          # Authentication pages
+│   ├── app/                # Next.js App Router (Presentation Layer)
+│   │   ├── auth/          # Authentication routes (login, register, logout)
 │   │   ├── profile/       # Protected profile page
 │   │   ├── layout.tsx     # Root layout
 │   │   ├── page.tsx       # Home page
-│   │   └── providers.tsx  # Client-side providers
-│   ├── actions/           # Server actions
-│   ├── modules/           # Core modules (auth, db)
-│   └── utils/             # Utility functions
+│   │   └── providers.tsx  # Client-side providers (NextUI)
+│   ├── components/        # Reusable UI Components
+│   │   ├── auth/         # Auth-related components (forms, content)
+│   │   ├── home/         # Home page components
+│   │   └── profile/      # Profile page components
+│   ├── features/         # Business Logic by Feature
+│   │   ├── auth/        # Authentication actions (login, register, logout)
+│   │   └── users/       # User-related actions (get users)
+│   ├── lib/             # Shared Utilities & Infrastructure
+│   │   ├── utils/       # Utility functions (validators, etc.)
+│   │   ├── auth.ts      # Authentication utilities
+│   │   ├── db.ts        # Database connection (Prisma)
+│   │   └── proxy.ts     # Middleware proxy
+│   └── types/           # TypeScript type definitions
 ├── prisma/
-│   └── schema.prisma      # Database schema
-└── public/                # Static files
+│   └── schema.prisma    # Database schema
+└── public/              # Static files
 ```
+
+**Key Principles:**
+- **kebab-case**: All files and folders use kebab-case naming
+- **Feature-based**: Business logic organized by domain (auth, users, etc.)
+- **Clean separation**: UI components separated from business logic
+- **Barrel exports**: Each folder has index.ts for clean imports
+
+For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Authentication
 

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 
-import { logoutAction } from "@/actions/auth/logout"
+import { logoutAction } from "@/features/auth/logout"
 
 export default function Logout() {
 	const router = useRouter()

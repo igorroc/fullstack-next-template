@@ -1,6 +1,6 @@
 "use server"
 
-import { authenticateLogout } from "@/modules/auth"
+import { authenticateLogout } from "@/lib/auth"
 
 export async function logoutAction() {
 	try {

@@ -1,6 +1,6 @@
-import { getUserBySession } from "@/modules/auth"
-import { getAllUsers } from "@/actions/users/getUsers"
-import { ProfileContent } from "./profile-content"
+import { getUserBySession } from "@/lib/auth"
+import { getAllUsers } from "@/features/users/get-all-users"
+import { ProfileContent } from "@/components/profile/profile-content"
 
 export default async function Profile() {
 	const user = await getUserBySession()

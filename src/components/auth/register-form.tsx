@@ -2,16 +2,16 @@
 
 import { Input, Button } from "@nextui-org/react"
 import { toast } from "react-toastify"
-import { loginAction } from "@/actions/auth/login"
+import { registerAction } from "@/features/auth/register"
 import { useState } from "react"
 
-export default function Form() {
+export function RegisterForm() {
 	const [isLoading, setIsLoading] = useState(false)
 
-	async function loginClient(formData: FormData) {
+	async function registerClient(formData: FormData) {
 		setIsLoading(true)
 		try {
-			const res = await loginAction(formData)
+			const res = await registerAction(formData)
 
 			if (res && "error" in res) {
 				toast.error(res.error)
@@ -25,7 +25,16 @@ export default function Form() {
 	}
 
 	return (
-		<form action={loginClient} className="flex flex-col gap-4">
+		<form action={registerClient} className="flex flex-col gap-4">
+			<Input
+				type="text"
+				label="Name"
+				placeholder="Enter your name"
+				name="name"
+				isRequired
+				variant="bordered"
+				isDisabled={isLoading}
+			/>
 			<Input
 				type="email"
 				label="Email"
@@ -46,12 +55,12 @@ export default function Form() {
 			/>
 			<Button
 				type="submit"
-				color="primary"
+				color="secondary"
 				size="lg"
 				className="mt-2"
 				isLoading={isLoading}
 			>
-				Login
+				Register
 			</Button>
 		</form>
 	)

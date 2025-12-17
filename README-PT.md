@@ -105,21 +105,41 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver se
 
 ## Estrutura do Projeto
 
+Este projeto segue princípios de clean architecture com uma estrutura bem organizada:
+
 ```
 ├── src/
-│   ├── app/                # Diretório app do Next.js
-│   │   ├── auth/          # Páginas de autenticação
+│   ├── app/                # Next.js App Router (Camada de Apresentação)
+│   │   ├── auth/          # Rotas de autenticação (login, register, logout)
 │   │   ├── profile/       # Página de perfil protegida
 │   │   ├── layout.tsx     # Layout raiz
 │   │   ├── page.tsx       # Página inicial
-│   │   └── providers.tsx  # Providers do lado do cliente
-│   ├── actions/           # Server actions
-│   ├── modules/           # Módulos principais (auth, db)
-│   └── utils/             # Funções utilitárias
+│   │   └── providers.tsx  # Providers do lado do cliente (NextUI)
+│   ├── components/        # Componentes UI Reutilizáveis
+│   │   ├── auth/         # Componentes relacionados à autenticação
+│   │   ├── home/         # Componentes da página inicial
+│   │   └── profile/      # Componentes da página de perfil
+│   ├── features/         # Lógica de Negócio por Feature
+│   │   ├── auth/        # Actions de autenticação (login, register, logout)
+│   │   └── users/       # Actions relacionadas a usuários
+│   ├── lib/             # Utilitários e Infraestrutura Compartilhados
+│   │   ├── utils/       # Funções utilitárias (validators, etc.)
+│   │   ├── auth.ts      # Utilitários de autenticação
+│   │   ├── db.ts        # Conexão com banco de dados (Prisma)
+│   │   └── proxy.ts     # Proxy do middleware
+│   └── types/           # Definições de tipos TypeScript
 ├── prisma/
-│   └── schema.prisma      # Schema do banco de dados
-└── public/                # Arquivos estáticos
+│   └── schema.prisma    # Schema do banco de dados
+└── public/              # Arquivos estáticos
 ```
+
+**Princípios Chave:**
+- **kebab-case**: Todos os arquivos e pastas usam nomenclatura kebab-case
+- **Baseado em features**: Lógica de negócio organizada por domínio (auth, users, etc.)
+- **Separação limpa**: Componentes UI separados da lógica de negócio
+- **Barrel exports**: Cada pasta tem index.ts para imports limpos
+
+Para documentação detalhada da arquitetura, veja [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Autenticação
 
