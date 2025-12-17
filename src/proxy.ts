@@ -2,7 +2,7 @@ import { NextRequest } from "next/server"
 
 import { getUserBySession } from "@/modules/auth"
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
 	if (
 		request.nextUrl.pathname.startsWith("/auth") &&
 		!request.nextUrl.pathname.startsWith("/auth/logout")
