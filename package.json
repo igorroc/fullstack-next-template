@@ -16,9 +16,11 @@
 		"ts-check": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@nextui-org/react": "^2.6.11",
 		"@prisma/client": "^5.12.1",
 		"@vercel/postgres": "^0.8.0",
 		"bcrypt": "^5.1.1",
+		"framer-motion": "^12.23.26",
 		"jose": "^5.2.4",
 		"next": "16.0.10",
 		"react": "^18",

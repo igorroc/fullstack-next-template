@@ -1,7 +1,7 @@
 "use client"
 
+import { Input, Button } from "@nextui-org/react"
 import { toast } from "react-toastify"
-
 import { registerAction } from "@/actions/auth/register"
 
 export default function Form() {
@@ -16,31 +16,34 @@ export default function Form() {
 	}
 
 	return (
-		<form action={registerClient} className="flex flex-col gap-1">
-			<input
+		<form action={registerClient} className="flex flex-col gap-4">
+			<Input
 				type="text"
-				placeholder="Your name"
+				label="Name"
+				placeholder="Enter your name"
 				name="name"
-				className="p-2 bg-transparent border-b-2 border-gray-700"
+				isRequired
+				variant="bordered"
 			/>
-			<input
+			<Input
 				type="email"
-				placeholder="Your email"
+				label="Email"
+				placeholder="Enter your email"
 				name="email"
-				className="p-2 bg-transparent border-b-2 border-gray-700"
+				isRequired
+				variant="bordered"
 			/>
-			<input
+			<Input
 				type="password"
-				placeholder="Your password"
+				label="Password"
+				placeholder="Enter your password"
 				name="password"
-				className="p-2 bg-transparent border-b-2 border-gray-700"
+				isRequired
+				variant="bordered"
 			/>
-			<button
-				type="submit"
-				className="mt-4 px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-700 transition-all"
-			>
+			<Button type="submit" color="secondary" size="lg" className="mt-2">
 				Register
-			</button>
+			</Button>
 		</form>
 	)
 }
