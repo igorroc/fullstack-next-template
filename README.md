@@ -37,7 +37,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 
 ### Prerequisites
 
-- Node.js 18+ or Bun
+- Bun 1.3.14+
 - Docker and Docker Compose
 - Git
 
@@ -53,9 +53,7 @@ cd my-project
 2. **Install dependencies:**
 
 ```bash
-npm install
-# or
-bun install
+bun install --frozen-lockfile
 ```
 
 3. **Set up environment variables:**
@@ -79,7 +77,7 @@ Replace the values with your own:
 4. **Start the PostgreSQL database:**
 
 ```bash
-npm run compose:up
+bun run compose:up
 ```
 
 This will start a PostgreSQL container using Docker Compose.
@@ -87,7 +85,7 @@ This will start a PostgreSQL container using Docker Compose.
 5. **Run database migrations:**
 
 ```bash
-npm run migrate
+bun run migrate
 ```
 
 This will create the database schema and generate Prisma Client.
@@ -95,22 +93,22 @@ This will create the database schema and generate Prisma Client.
 6. **Start the development server:**
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see your app.
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run ts-check` - Type check without emitting files
-- `npm run compose:up` - Start PostgreSQL container
-- `npm run migrate` - Run Prisma migrations
-- `npm run migrate:reset` - Reset database and run migrations
-- `npm run prisma:studio` - Open Prisma Studio (database GUI)
+- `bun run dev` - Start development server
+- `bun run build` - Build for production
+- `bun run start` - Start production server
+- `bun run lint` - Run ESLint
+- `bun run ts-check` - Type check without emitting files
+- `bun run compose:up` - Start PostgreSQL container
+- `bun run migrate` - Run Prisma migrations
+- `bun run migrate:reset` - Reset database and run migrations
+- `bun run prisma:studio` - Open Prisma Studio (database GUI)
 
 ## Project Structure
 
@@ -165,8 +163,8 @@ The template includes a complete authentication system:
 The template uses Prisma with PostgreSQL:
 
 - Edit `prisma/schema.prisma` to modify your database schema
-- Run `npm run migrate` to apply changes
-- Use `npm run prisma:studio` to visualize your data
+- Run `bun run migrate` to apply changes
+- Use `bun run prisma:studio` to visualize your data
 
 ## Deploy on Vercel
 
@@ -244,8 +242,8 @@ export default async function ProductsPage() {
 Modify `prisma/schema.prisma` to add or change models, then run:
 
 ```bash
-npm run migrate:create-only  # Create migration without applying
-npm run migrate              # Apply migrations
+bun run migrate:create-only  # Create migration without applying
+bun run migrate              # Apply migrations
 ```
 
 ### Import Examples
@@ -270,6 +268,14 @@ import db from "@/lib/db"
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
+
+### Commit Messages
+
+This repository uses [Conventional Commits](https://www.conventionalcommits.org/) to determine semantic versioning: `fix` creates a patch release, `feat` creates a minor release, and `!` or a `BREAKING CHANGE:` footer creates a major release. WebStorm loads the committed `.gitmessage` template automatically after running:
+
+```bash
+git config --local commit.template .gitmessage
+```
 
 ## License
 
