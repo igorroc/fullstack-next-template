@@ -6,13 +6,6 @@ import {
 	CardHeader,
 	Button,
 	Chip,
-	User,
-	Table,
-	TableHeader,
-	TableColumn,
-	TableBody,
-	TableRow,
-	TableCell,
 	Avatar,
 	Divider,
 } from "@nextui-org/react"
@@ -27,10 +20,9 @@ type UserType = {
 
 type ProfileContentProps = {
 	user: UserType | null
-	allUsers: UserType[]
 }
 
-export function ProfileContent({ user, allUsers }: ProfileContentProps) {
+export function ProfileContent({ user }: ProfileContentProps) {
 	if (!user) {
 		return (
 			<main className="flex min-h-dvh flex-col items-center justify-center p-8 bg-gradient-to-br from-gray-900 to-gray-800">
@@ -58,7 +50,6 @@ export function ProfileContent({ user, allUsers }: ProfileContentProps) {
 	return (
 		<main className="flex min-h-dvh flex-col items-center p-8 py-12 bg-gradient-to-br from-gray-900 to-gray-800">
 			<div className="max-w-3xl w-full space-y-6">
-				{/* User Profile Card */}
 				<Card className="w-full">
 					<CardHeader className="flex flex-col items-center gap-3 pb-4 pt-6">
 						<Chip color="success" variant="flat" size="sm">
@@ -107,64 +98,6 @@ export function ProfileContent({ user, allUsers }: ProfileContentProps) {
 								Log out
 							</Button>
 						</div>
-					</CardBody>
-				</Card>
-
-				{/* Users List Card */}
-				<Card className="w-full">
-					<CardHeader className="flex flex-col gap-2 pb-4">
-						<div className="flex items-center justify-between w-full">
-							<h2 className="text-2xl font-bold">Registered Users</h2>
-							<Chip color="primary" variant="flat">
-								{allUsers.length} {allUsers.length === 1 ? "user" : "users"}
-							</Chip>
-						</div>
-						<p className="text-sm text-gray-500">
-							All users registered in the system
-						</p>
-					</CardHeader>
-					<CardBody>
-						<Table aria-label="Users table" removeWrapper>
-							<TableHeader>
-								<TableColumn>USER</TableColumn>
-								<TableColumn>EMAIL</TableColumn>
-								<TableColumn>JOINED</TableColumn>
-							</TableHeader>
-							<TableBody>
-								{allUsers.map((u) => (
-									<TableRow key={u.id}>
-										<TableCell>
-											<User
-												name={u.name || "Anonymous"}
-												avatarProps={{
-													name: u.name?.charAt(0).toUpperCase() || "A",
-													showFallback: true,
-													size: "sm",
-												}}
-												classNames={{
-													name: u.id === user.id ? "font-bold" : "",
-												}}
-											/>
-										</TableCell>
-										<TableCell>
-											<div className="flex items-center gap-2">
-												<span className="text-sm">{u.email}</span>
-												{u.id === user.id && (
-													<Chip size="sm" color="success" variant="flat">
-														You
-													</Chip>
-												)}
-											</div>
-										</TableCell>
-										<TableCell>
-											<span className="text-sm text-gray-500">
-												{formatDate(u.createdAt)}
-											</span>
-										</TableCell>
-									</TableRow>
-								))}
-							</TableBody>
-						</Table>
 					</CardBody>
 				</Card>
 			</div>
