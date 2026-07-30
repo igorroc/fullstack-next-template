@@ -30,6 +30,10 @@ export async function loginAction(formData: FormData) {
 			where: {
 				email: user.email,
 			},
+			select: {
+				id: true,
+				password: true,
+			},
 		})
 
 		if (!existingUser) {
@@ -46,7 +50,7 @@ export async function loginAction(formData: FormData) {
 			}
 		}
 
-		await authenticateLogin(existingUser)
+		await authenticateLogin(existingUser.id)
 	} catch (e) {
 		return {
 			error: "Something went wrong. Please try again later.",

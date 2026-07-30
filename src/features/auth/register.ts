@@ -30,6 +30,9 @@ export async function registerAction(formData: FormData) {
 			where: {
 				email: user.email,
 			},
+			select: {
+				id: true,
+			},
 		})
 
 		if (existingUser) {
@@ -47,9 +50,12 @@ export async function registerAction(formData: FormData) {
 					email: user.email,
 					password: encryptedPassword,
 				},
+				select: {
+					id: true,
+				},
 			})
 
-			await authenticateLogin(newUser)
+			await authenticateLogin(newUser.id)
 		} catch (e) {
 			return {
 				error: "Error creating user. Please try again later.",
