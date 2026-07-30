@@ -11,7 +11,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Clean Architecture** - Estrutura de pastas bem organizada seguindo as melhores práticas
 - **Autenticação** - Sistema completo de autenticação com rotas protegidas e login automático após registro
 - **Banco de Dados** - PostgreSQL com Prisma ORM
-- **Componentes UI** - NextUI (baseado em Tailwind CSS) para componentes modernos e acessíveis
+- **Componentes UI** - HeroUI (baseado em Tailwind CSS) para componentes modernos e acessíveis
 - **Docker** - Banco de dados PostgreSQL containerizado
 - **Rotas de API Tipadas** - Route Handlers com schemas compartilhados, cliente tipado, estados de loading e tratamento de erros
 
@@ -28,7 +28,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Next.js 16** - Framework React para produção
 - **TypeScript 5** - JavaScript com sintaxe para tipos
 - **Tailwind CSS 3.3** - Framework CSS utility-first
-- **NextUI** - Biblioteca de UI React bonita, rápida e moderna
+- **HeroUI** - Biblioteca de UI React bonita, rápida e moderna
 - **Prisma 5.12** - ORM de nova geração para TypeScript & Node.js
 - **PostgreSQL 15** - Banco de dados relacional poderoso e open-source
 - **Docker** - Plataforma para aplicações containerizadas
@@ -123,7 +123,7 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 │   │   ├── profile/       # Página de perfil protegida
 │   │   ├── layout.tsx     # Layout raiz
 │   │   ├── page.tsx       # Página inicial
-│   │   └── providers.tsx  # Providers do lado do cliente (NextUI)
+│   │   └── providers.tsx  # Providers do lado do cliente (HeroUI)
 │   ├── components/        # Componentes UI Reutilizáveis
 │   │   ├── auth/         # Componentes relacionados à autenticação
 │   │   ├── home/         # Componentes da página inicial
@@ -189,11 +189,11 @@ vercel
 
 ### Estilização
 
-O template usa componentes NextUI com Tailwind CSS. Você pode customizar:
+O template usa componentes HeroUI com Tailwind CSS. Você pode customizar:
 
 - **Tema**: Edite `tailwind.config.ts` para modificar cores, fontes, etc.
-- **NextUI**: Configure o tema do NextUI no mesmo arquivo
-- **Componentes**: Todas as páginas usam componentes NextUI que são totalmente customizáveis
+- **HeroUI**: Configure o tema do HeroUI no mesmo arquivo
+- **Componentes**: Todas as páginas usam componentes HeroUI que são totalmente customizáveis
 - **Dark Mode**: Suporte integrado para modo escuro (ative em `tailwind.config.ts`)
 
 ### Adicionando Novas Features
@@ -234,7 +234,7 @@ export async function GET() {
 ```typescript
 // src/components/produtos/lista-produtos.tsx
 "use client"
-import { Card } from "@nextui-org/react"
+import { Card } from "@heroui/react"
 
 export function ListaProdutos({ produtos }) {
 	// Lógica do componente

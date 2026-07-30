@@ -11,7 +11,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 - **Clean Architecture** - Well-organized folder structure following best practices
 - **Authentication** - Complete auth system with protected routes and automatic login after registration
 - **Database** - PostgreSQL with Prisma ORM
-- **UI Components** - NextUI (based on Tailwind CSS) for modern, accessible components
+- **UI Components** - HeroUI (based on Tailwind CSS) for modern, accessible components
 - **Docker** - Containerized PostgreSQL database
 - **Typed API Routes** - Route Handlers with shared schemas, typed client calls, loading states, and error handling
 
@@ -28,7 +28,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 - **Next.js 16** - React framework for production
 - **TypeScript 5** - JavaScript with syntax for types
 - **Tailwind CSS 3.3** - Utility-first CSS framework
-- **NextUI** - Beautiful, fast and modern React UI library
+- **HeroUI** - Beautiful, fast and modern React UI library
 - **Prisma 5.12** - Next-generation ORM for TypeScript & Node.js
 - **PostgreSQL 15** - Powerful, open-source relational database
 - **Docker** - Platform for containerized applications
@@ -124,7 +124,7 @@ This project follows clean architecture principles with a well-organized structu
 │   │   ├── profile/       # Protected profile page
 │   │   ├── layout.tsx     # Root layout
 │   │   ├── page.tsx       # Home page
-│   │   └── providers.tsx  # Client-side providers (NextUI)
+│   │   └── providers.tsx  # Client-side providers (HeroUI)
 │   ├── components/        # Reusable UI Components
 │   │   ├── auth/         # Auth-related components (forms, content)
 │   │   ├── home/         # Home page components
@@ -190,11 +190,11 @@ vercel
 
 ### Styling
 
-The template uses NextUI components with Tailwind CSS. You can customize:
+The template uses HeroUI components with Tailwind CSS. You can customize:
 
 - **Theme**: Edit `tailwind.config.ts` to modify colors, fonts, etc.
-- **NextUI**: Configure NextUI theme in the same file
-- **Components**: All pages use NextUI components which are fully customizable
+- **HeroUI**: Configure HeroUI theme in the same file
+- **Components**: All pages use HeroUI components which are fully customizable
 - **Dark Mode**: Built-in dark mode support (toggle in `tailwind.config.ts`)
 
 ### Adding New Features
@@ -237,7 +237,7 @@ export async function GET() {
 ```typescript
 // src/components/products/product-list.tsx
 "use client"
-import { Card } from "@nextui-org/react"
+import { Card } from "@heroui/react"
 
 export function ProductList({ products }) {
 	// Your component logic
