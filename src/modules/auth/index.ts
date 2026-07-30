@@ -1,0 +1,5 @@
+export { AuthService } from "./auth-service"
+export { AuthSession } from "./auth-session"
+export { loginRequestSchema, registerRequestSchema } from "./schemas"
+export type { AuthError, AuthResponse, LoginRequest, RegisterRequest } from "./schemas"
+export type { CurrentUser } from "./types"
