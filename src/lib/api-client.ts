@@ -1,25 +1,27 @@
-import type { AuthResponse, LoginRequest, RegisterRequest } from "@/features/auth/schemas"
+import type { AuthResponse, LoginRequest, RegisterRequest } from "@/modules/auth/schemas"
 
-async function postJson<TRequest, TResponse>(url: string, body?: TRequest): Promise<TResponse> {
-	const response = await fetch(url, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: body ? JSON.stringify(body) : undefined,
-	})
+export class ApiClient {
+	static login(input: LoginRequest) {
+		return this.postJson<LoginRequest, AuthResponse>("/api/auth/login", input)
+	}
 
-	return response.json() as Promise<TResponse>
-}
+	static register(input: RegisterRequest) {
+		return this.postJson<RegisterRequest, AuthResponse>("/api/auth/register", input)
+	}
 
-export const apiClient = {
-	login(input: LoginRequest) {
-		return postJson<LoginRequest, AuthResponse>("/api/auth/login", input)
-	},
-	register(input: RegisterRequest) {
-		return postJson<RegisterRequest, AuthResponse>("/api/auth/register", input)
-	},
-	logout() {
-		return postJson<undefined, AuthResponse>("/api/auth/logout")
-	},
+	static logout() {
+		return this.postJson<undefined, AuthResponse>("/api/auth/logout")
+	}
+
+	private static async postJson<TRequest, TResponse>(url: string, body?: TRequest): Promise<TResponse> {
+		const response = await fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: body ? JSON.stringify(body) : undefined,
+		})
+
+		return response.json() as Promise<TResponse>
+	}
 }

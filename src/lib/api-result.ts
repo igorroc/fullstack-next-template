@@ -8,20 +8,24 @@ export type ApiFailure<TError> = {
 	error: TError
 }
 
-export type ApiResult<TData, TError> = ApiSuccess<TData> | ApiFailure<TError>
+export type ApiResultType<TData, TError> = ApiSuccess<TData> | ApiFailure<TError>
 
-export function success<TData>(data: TData): ApiSuccess<TData> {
-	return { success: true, data }
+export class ApiResult {
+	static success<TData>(data: TData): ApiSuccess<TData> {
+		return { success: true, data }
+	}
+
+	static failure<TError>(error: TError): ApiFailure<TError> {
+		return { success: false, error }
+	}
 }
 
-export function failure<TError>(error: TError): ApiFailure<TError> {
-	return { success: false, error }
-}
+export class TypeGuard {
+	static isSuccess<TData, TError>(result: ApiResultType<TData, TError>): result is ApiSuccess<TData> {
+		return result.success
+	}
 
-export function isSuccess<TData, TError>(result: ApiResult<TData, TError>): result is ApiSuccess<TData> {
-	return result.success
-}
-
-export function isFailure<TData, TError>(result: ApiResult<TData, TError>): result is ApiFailure<TError> {
-	return !result.success
+	static isFailure<TData, TError>(result: ApiResultType<TData, TError>): result is ApiFailure<TError> {
+		return !result.success
+	}
 }

@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server"
-import { failure, success } from "@/lib/api-result"
-import type { AuthError, AuthResponse } from "@/features/auth/schemas"
+import { ApiResult } from "@/lib/api-result"
+import type { AuthError, AuthResponse } from "@/modules/auth/schemas"
 
 type ErrorCode = AuthError["code"]
 
-export function apiSuccess(status = 200) {
-	return NextResponse.json<AuthResponse>(success(null), { status })
-}
+export class ApiResponse {
+	static success(status = 200) {
+		return NextResponse.json<AuthResponse>(ApiResult.success(null), { status })
+	}
 
-export function apiError(code: ErrorCode, message: string, status: number) {
-	return NextResponse.json<AuthResponse>(failure({ code, message }), { status })
+	static error(code: ErrorCode, message: string, status: number) {
+		return NextResponse.json<AuthResponse>(ApiResult.failure({ code, message }), { status })
+	}
 }

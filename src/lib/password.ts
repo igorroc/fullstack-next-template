@@ -9,10 +9,12 @@ const passwordHashOptions: Options = {
 	outputLen: 32,
 }
 
-export async function hashPassword(password: string) {
-	return hash(password, passwordHashOptions)
-}
+export class PasswordService {
+	static async hash(password: string) {
+		return hash(password, passwordHashOptions)
+	}
 
-export async function verifyPassword(passwordHash: string, password: string) {
-	return verify(passwordHash, password)
+	static async verify(passwordHash: string, password: string) {
+		return verify(passwordHash, password)
+	}
 }
