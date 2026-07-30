@@ -48,7 +48,6 @@ export function RegisterForm() {
 				name="name"
 				required
 				variant="secondary"
-				className="text-white placeholder:text-slate-400"
 				disabled={isLoading}
 			/>
 			<Input
@@ -58,7 +57,6 @@ export function RegisterForm() {
 				name="email"
 				required
 				variant="secondary"
-				className="text-white placeholder:text-slate-400"
 				disabled={isLoading}
 			/>
 			<Input
@@ -68,13 +66,13 @@ export function RegisterForm() {
 				name="password"
 				required
 				variant="secondary"
-				className="text-white placeholder:text-slate-400"
 				disabled={isLoading}
 			/>
 			<Button
 				type="submit"
 				variant="secondary"
 				size="lg"
+				fullWidth
 				className="mt-2 font-semibold"
 				isDisabled={isLoading}
 			>

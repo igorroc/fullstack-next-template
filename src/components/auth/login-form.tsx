@@ -47,7 +47,6 @@ export function LoginForm() {
 				name="email"
 				required
 				variant="primary"
-				className="text-white placeholder:text-slate-400"
 				disabled={isLoading}
 			/>
 			<Input
@@ -57,13 +56,13 @@ export function LoginForm() {
 				name="password"
 				required
 				variant="primary"
-				className="text-white placeholder:text-slate-400"
 				disabled={isLoading}
 			/>
 			<Button
 				type="submit"
 				variant="primary"
 				size="lg"
+				fullWidth
 				className="mt-2 font-semibold"
 				isDisabled={isLoading}
 			>

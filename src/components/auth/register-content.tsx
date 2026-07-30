@@ -7,10 +7,10 @@ import { RegisterForm } from "./register-form"
 export function RegisterContent() {
 	return (
 		<main className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6 py-12">
-			<div className="absolute -bottom-20 left-10 h-72 w-72 rounded-full bg-secondary/25 blur-3xl" />
+			<div className="bg-secondary/25 absolute -bottom-20 left-10 h-72 w-72 rounded-full blur-3xl" />
 			<Card className="w-full max-w-md border border-white/15 bg-white/10 shadow-2xl shadow-fuchsia-950/30 backdrop-blur-xl">
-				<Card.Header className="flex flex-col gap-3 px-6 pb-4 pt-8 text-center">
-					<p className="text-sm font-semibold uppercase tracking-[0.3em] text-fuchsia-200">
+				<Card.Header className="flex flex-col gap-3 px-6 pt-8 pb-4 text-center">
+					<p className="text-sm font-semibold tracking-[0.3em] text-fuchsia-200 uppercase">
 						Comece agora
 					</p>
 					<h1 className="text-4xl font-black text-white">Criar conta</h1>

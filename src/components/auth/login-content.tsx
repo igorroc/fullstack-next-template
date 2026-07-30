@@ -7,10 +7,10 @@ import { LoginForm } from "./login-form"
 export function LoginContent() {
 	return (
 		<main className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6 py-12">
-			<div className="absolute -top-20 right-10 h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
+			<div className="bg-primary/25 absolute -top-20 right-10 h-64 w-64 rounded-full blur-3xl" />
 			<Card className="w-full max-w-md border border-white/15 bg-white/10 shadow-2xl shadow-sky-950/40 backdrop-blur-xl">
-				<Card.Header className="flex flex-col gap-3 px-6 pb-4 pt-8 text-center">
-					<p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-200">
+				<Card.Header className="flex flex-col gap-3 px-6 pt-8 pb-4 text-center">
+					<p className="text-sm font-semibold tracking-[0.3em] text-sky-200 uppercase">
 						Bem-vindo de volta
 					</p>
 					<h1 className="text-4xl font-black text-white">Entrar</h1>

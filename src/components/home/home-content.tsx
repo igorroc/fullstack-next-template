@@ -6,11 +6,11 @@ import { Card, Chip } from "@heroui/react"
 export function HomeContent() {
 	return (
 		<main className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6 py-12">
-			<div className="absolute left-8 top-12 h-52 w-52 rounded-full bg-sky-400/20 blur-3xl" />
-			<div className="absolute bottom-12 right-6 h-64 w-64 rounded-full bg-fuchsia-500/20 blur-3xl" />
+			<div className="absolute top-12 left-8 h-52 w-52 rounded-full bg-sky-400/20 blur-3xl" />
+			<div className="absolute right-6 bottom-12 h-64 w-64 rounded-full bg-fuchsia-500/20 blur-3xl" />
 
 			<Card className="w-full max-w-3xl border border-white/15 bg-white/10 shadow-2xl shadow-sky-950/40 backdrop-blur-xl">
-				<Card.Header className="flex flex-col items-center gap-4 px-6 pb-2 pt-8 text-center sm:px-10">
+				<Card.Header className="flex flex-col items-center gap-4 px-6 pt-8 pb-2 text-center sm:px-10">
 					<Chip
 						color="accent"
 						variant="soft"
