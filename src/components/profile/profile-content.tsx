@@ -11,33 +11,13 @@ import {
 } from "@nextui-org/react"
 import Link from "next/link"
 
-type UserType = {
-	id: string
-	email: string
-	name: string | null
-	createdAt?: Date
-}
+import type { CurrentUser } from "@/lib/auth-types"
 
 type ProfileContentProps = {
-	user: UserType | null
+	user: CurrentUser
 }
 
 export function ProfileContent({ user }: ProfileContentProps) {
-	if (!user) {
-		return (
-			<main className="flex min-h-dvh flex-col items-center justify-center p-8 bg-gradient-to-br from-gray-900 to-gray-800">
-				<Card className="max-w-md w-full">
-					<CardBody className="text-center">
-						<p className="text-lg">You are not logged in</p>
-						<Button as={Link} href="/auth/login" color="primary" className="mt-4">
-							Go to Login
-						</Button>
-					</CardBody>
-				</Card>
-			</main>
-		)
-	}
-
 	const formatDate = (date?: Date) => {
 		if (!date) return "N/A"
 		return new Date(date).toLocaleDateString("en-US", {
