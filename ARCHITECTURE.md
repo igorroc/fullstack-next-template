@@ -85,7 +85,7 @@ Each feature (auth, users, etc.) contains:
 import { LoginContent, LoginForm } from "@/components/auth"
 import { loginAction, logoutAction } from "@/features/auth"
 import { isEmail } from "@/lib/utils"
-import { getUserBySession } from "@/lib/auth"
+import { requireUser } from "@/lib/auth"
 ```
 
 ## File Naming Conventions
