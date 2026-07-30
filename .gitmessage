@@ -1,0 +1,12 @@
+<type>(<scope>): <short imperative summary>
+
+# SemVer mapping:
+# feat:     minor release
+# fix:      patch release
+# feat!: or BREAKING CHANGE: major release
+#
+# Allowed types: feat, fix, docs, refactor, perf, test, build, ci, chore, revert
+# Scope is optional and identifies the affected area, for example: auth, db, ui.
+# Keep the summary in the imperative mood, lowercase, and without a trailing period.
+# Add a blank line followed by details only when they add useful context.
+# Use a BREAKING CHANGE: footer to describe incompatible behavior.
