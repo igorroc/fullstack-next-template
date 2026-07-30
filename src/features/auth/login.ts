@@ -1,11 +1,11 @@
 "use server"
 
-import bcrypt from "bcrypt"
 import { redirect } from "next/navigation"
 
 import db from "@/lib/db"
 import { isEmail } from "@/lib/utils/validators"
 import { authenticateLogin } from "@/lib/auth"
+import { verifyPassword } from "@/lib/password"
 
 export async function loginAction(formData: FormData) {
 	const user = {
@@ -38,7 +38,7 @@ export async function loginAction(formData: FormData) {
 			}
 		}
 
-		const isPasswordCorrect = await bcrypt.compare(user.password, existingUser.password)
+		const isPasswordCorrect = await verifyPassword(existingUser.password, user.password)
 
 		if (!isPasswordCorrect) {
 			return {

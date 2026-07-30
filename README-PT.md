@@ -30,7 +30,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Prisma 5.12** - ORM de nova geração para TypeScript & Node.js
 - **PostgreSQL 15** - Banco de dados relacional poderoso e open-source
 - **Docker** - Plataforma para aplicações containerizadas
-- **bcrypt** - Hash de senhas
+- **Argon2id** - Hash de senhas
 - **Jose** - Implementação de JWT
 
 ## Começando

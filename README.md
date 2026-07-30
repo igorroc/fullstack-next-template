@@ -30,7 +30,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 - **Prisma 5.12** - Next-generation ORM for TypeScript & Node.js
 - **PostgreSQL 15** - Powerful, open-source relational database
 - **Docker** - Platform for containerized applications
-- **bcrypt** - Password hashing
+- **Argon2id** - Password hashing
 - **Jose** - JWT implementation
 
 ## Getting Started
