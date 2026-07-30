@@ -31,7 +31,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 - **PostgreSQL 15** - Powerful, open-source relational database
 - **Docker** - Platform for containerized applications
 - **Argon2id** - Password hashing
-- **Jose** - JWT implementation
+- **Opaque Sessions** - Database-backed session management
 
 ## Getting Started
 
@@ -66,13 +66,11 @@ DATABASE_USER="postgres"
 DATABASE_PASSWORD="custom_db_password"
 
 POSTGRES_PRISMA_URL="postgresql://postgres:custom_db_password@localhost:5432/your_database_name"
-AUTHENTICATION_SECRET_KEY="random_hash_1234567890ABCDE"
 ```
 
 Replace the values with your own:
 - `DATABASE_DB`: Choose a name for your database
 - `DATABASE_PASSWORD`: Set a secure password
-- `AUTHENTICATION_SECRET_KEY`: Generate a random secure string
 
 4. **Start the PostgreSQL database:**
 
@@ -155,7 +153,7 @@ The template includes a complete authentication system:
 - **Login** - `/auth/login`
 - **Logout** - `/auth/logout`
 - **Protected Routes** - Using Next.js Proxy
-- **Session Management** - JWT-based sessions
+- **Session Management** - Database-backed opaque sessions
 
 ## Database
 
@@ -259,7 +257,7 @@ import { ProfileContent } from "@/components/profile"
 
 // Utilities
 import { isEmail } from "@/lib/utils"
-import { getUserBySession } from "@/lib/auth"
+import { requireUser } from "@/lib/auth"
 import db from "@/lib/db"
 ```
 

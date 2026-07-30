@@ -31,7 +31,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **PostgreSQL 15** - Banco de dados relacional poderoso e open-source
 - **Docker** - Plataforma para aplicações containerizadas
 - **Argon2id** - Hash de senhas
-- **Jose** - Implementação de JWT
+- **Sessões Opacas** - Gerenciamento de sessão persistido no banco
 
 ## Começando
 
@@ -66,13 +66,11 @@ DATABASE_USER="postgres"
 DATABASE_PASSWORD="senha_personalizada_db"
 
 POSTGRES_PRISMA_URL="postgresql://postgres:senha_personalizada_db@localhost:5432/nome_do_seu_banco"
-AUTHENTICATION_SECRET_KEY="hash_aleatorio_1234567890ABCDE"
 ```
 
 Substitua os valores pelos seus próprios:
 - `DATABASE_DB`: Escolha um nome para seu banco de dados
 - `DATABASE_PASSWORD`: Defina uma senha segura
-- `AUTHENTICATION_SECRET_KEY`: Gere uma string aleatória segura
 
 4. **Inicie o banco de dados PostgreSQL:**
 
@@ -155,7 +153,7 @@ O template inclui um sistema completo de autenticação:
 - **Login** - `/auth/login`
 - **Logout** - `/auth/logout`
 - **Rotas Protegidas** - Usando Proxy do Next.js
-- **Gerenciamento de Sessão** - Sessões baseadas em JWT
+- **Gerenciamento de Sessão** - Sessões opacas persistidas no banco
 
 ## Banco de Dados
 
@@ -259,7 +257,7 @@ import { ProfileContent } from "@/components/profile"
 
 // Utilitários
 import { isEmail } from "@/lib/utils"
-import { getUserBySession } from "@/lib/auth"
+import { requireUser } from "@/lib/auth"
 import db from "@/lib/db"
 ```
 
