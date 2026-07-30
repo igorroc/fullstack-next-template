@@ -10,8 +10,12 @@ export function HomeContent() {
 			<div className="absolute bottom-12 right-6 h-64 w-64 rounded-full bg-fuchsia-500/20 blur-3xl" />
 
 			<Card className="w-full max-w-3xl border border-white/15 bg-white/10 shadow-2xl shadow-sky-950/40 backdrop-blur-xl">
-				<CardHeader className="flex flex-col items-center gap-4 px-6 pt-8 pb-2 text-center sm:px-10">
-					<Chip color="primary" variant="flat" className="border border-sky-300/20 bg-sky-400/10 text-sky-100">
+				<CardHeader className="flex flex-col items-center gap-4 px-6 pb-2 pt-8 text-center sm:px-10">
+					<Chip
+						color="primary"
+						variant="flat"
+						className="border border-sky-300/20 bg-sky-400/10 text-sky-100"
+					>
 						Next.js 16 + Prisma + PostgreSQL
 					</Chip>
 					<h1 className="max-w-2xl text-4xl font-black tracking-tight text-white sm:text-6xl">
@@ -20,8 +24,8 @@ export function HomeContent() {
 				</CardHeader>
 				<CardBody className="gap-8 px-6 pb-8 sm:px-10">
 					<p className="mx-auto max-w-2xl text-center text-base leading-7 text-slate-200 sm:text-lg">
-						Template pronto para evoluir seu produto com autenticação,
-						banco de dados e uma base visual mais acolhedora. Comece ajustando{" "}
+						Template pronto para evoluir seu produto com autenticação, banco de dados e uma base
+						visual mais acolhedora. Comece ajustando{" "}
 						<code className="rounded-lg border border-white/10 bg-white/10 px-2 py-1 text-sm text-sky-100">
 							src/app/page.tsx
 						</code>
@@ -53,13 +57,7 @@ export function HomeContent() {
 						>
 							Entrar
 						</Button>
-						<Button
-							as={Link}
-							href="/auth/register"
-							color="secondary"
-							variant="shadow"
-							size="lg"
-						>
+						<Button as={Link} href="/auth/register" color="secondary" variant="shadow" size="lg">
 							Criar conta
 						</Button>
 						<Button

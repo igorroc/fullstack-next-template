@@ -7,7 +7,11 @@ export async function POST(request: Request) {
 	const parsed = registerRequestSchema.safeParse(body)
 
 	if (!parsed.success) {
-		return ApiResponse.error("VALIDATION_ERROR", parsed.error.issues[0]?.message ?? "Invalid request", 400)
+		return ApiResponse.error(
+			"VALIDATION_ERROR",
+			parsed.error.issues[0]?.message ?? "Invalid request",
+			400,
+		)
 	}
 
 	try {

@@ -3,7 +3,10 @@ import { NextRequest } from "next/server"
 import { SessionCookie } from "./lib/session-cookie"
 
 export async function proxy(request: NextRequest) {
-	if (request.nextUrl.pathname.startsWith("/auth/login") || request.nextUrl.pathname.startsWith("/auth/register")) {
+	if (
+		request.nextUrl.pathname.startsWith("/auth/login") ||
+		request.nextUrl.pathname.startsWith("/auth/register")
+	) {
 		if (SessionCookie.hasSessionCookie(request)) {
 			return Response.redirect(new URL("/profile", request.url))
 		}

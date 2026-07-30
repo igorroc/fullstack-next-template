@@ -13,7 +13,10 @@ export class ApiClient {
 		return this.postJson<undefined, AuthResponse>("/api/auth/logout")
 	}
 
-	private static async postJson<TRequest, TResponse>(url: string, body?: TRequest): Promise<TResponse> {
+	private static async postJson<TRequest, TResponse>(
+		url: string,
+		body?: TRequest,
+	): Promise<TResponse> {
 		const response = await fetch(url, {
 			method: "POST",
 			credentials: "same-origin",

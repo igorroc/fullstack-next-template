@@ -1,14 +1,6 @@
 "use client"
 
-import {
-	Card,
-	CardBody,
-	CardHeader,
-	Button,
-	Chip,
-	Avatar,
-	Divider,
-} from "@nextui-org/react"
+import { Card, CardBody, CardHeader, Button, Chip, Avatar, Divider } from "@nextui-org/react"
 import Link from "next/link"
 
 import type { CurrentUser } from "@/modules/auth"
@@ -77,13 +69,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
 							>
 								Voltar ao início
 							</Button>
-							<Button
-								as={Link}
-								href="/auth/logout"
-								color="danger"
-								variant="shadow"
-								fullWidth
-							>
+							<Button as={Link} href="/auth/logout" color="danger" variant="shadow" fullWidth>
 								Sair
 							</Button>
 						</div>

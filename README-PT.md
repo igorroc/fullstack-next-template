@@ -5,6 +5,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 ## Funcionalidades
 
 ### Funcionalidades Principais
+
 - **Next.js 16** - A versão mais recente do Next.js com App Router
 - **TypeScript** - Desenvolvimento totalmente type-safe
 - **Clean Architecture** - Estrutura de pastas bem organizada seguindo as melhores práticas
@@ -15,6 +16,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Rotas de API Tipadas** - Route Handlers com schemas compartilhados, cliente tipado, estados de loading e tratamento de erros
 
 ### Páginas Implementadas
+
 - **Página Inicial** - Página de boas-vindas com navegação para páginas de autenticação
 - **Login** - Autenticação de usuário com redirecionamento automático para o perfil
 - **Registro** - Registro de usuário com login automático
@@ -69,6 +71,7 @@ POSTGRES_PRISMA_URL="postgresql://postgres:senha_personalizada_db@localhost:5432
 ```
 
 Substitua os valores pelos seus próprios:
+
 - `DATABASE_DB`: Escolha um nome para seu banco de dados
 - `DATABASE_PASSWORD`: Defina uma senha segura
 
@@ -139,6 +142,7 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 ```
 
 **Princípios Chave:**
+
 - **kebab-case**: Todos os arquivos e pastas usam nomenclatura kebab-case
 - **Baseado em features**: Lógica de negócio organizada por domínio (auth, users, etc.)
 - **Separação limpa**: Componentes UI separados da lógica de negócio
@@ -197,43 +201,48 @@ O template usa componentes NextUI com Tailwind CSS. Você pode customizar:
 A estrutura do projeto facilita a adição de novas funcionalidades:
 
 1. **Crie um service da feature** em `src/features/sua-feature/`:
+
 ```typescript
 // src/features/produtos/service.ts
 import "server-only"
 import db from "@/lib/db"
 
 export async function getProdutos() {
-  return await db.produto.findMany()
+	return await db.produto.findMany()
 }
 ```
 
 2. **Adicione exports** em `src/features/produtos/index.ts`:
+
 ```typescript
 export { getProdutos } from "./service"
 ```
 
 3. **Exponha um Route Handler** em `src/app/api/produtos/route.ts`:
+
 ```typescript
 import { NextResponse } from "next/server"
 import { getProdutos } from "@/features/produtos"
 
 export async function GET() {
-  return NextResponse.json({ success: true, data: await getProdutos() })
+	return NextResponse.json({ success: true, data: await getProdutos() })
 }
 ```
 
 4. **Crie componentes UI** em `src/components/produtos/`:
+
 ```typescript
 // src/components/produtos/lista-produtos.tsx
 "use client"
 import { Card } from "@nextui-org/react"
 
 export function ListaProdutos({ produtos }) {
-  // Lógica do componente
+	// Lógica do componente
 }
 ```
 
 5. **Use nas páginas** com imports limpos:
+
 ```typescript
 // src/app/produtos/page.tsx
 import { getProdutos } from "@/features/produtos"

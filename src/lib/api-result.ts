@@ -21,11 +21,15 @@ export class ApiResult {
 }
 
 export class TypeGuard {
-	static isSuccess<TData, TError>(result: ApiResultType<TData, TError>): result is ApiSuccess<TData> {
+	static isSuccess<TData, TError>(
+		result: ApiResultType<TData, TError>,
+	): result is ApiSuccess<TData> {
 		return result.success
 	}
 
-	static isFailure<TData, TError>(result: ApiResultType<TData, TError>): result is ApiFailure<TError> {
+	static isFailure<TData, TError>(
+		result: ApiResultType<TData, TError>,
+	): result is ApiFailure<TError> {
 		return !result.success
 	}
 }

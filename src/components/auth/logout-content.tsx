@@ -27,7 +27,9 @@ export function LogoutContent({ isExpired }: LogoutContentProps) {
 				return
 			}
 
-			toast.success(isExpired ? "Session expired. Please log in again." : "User logged out successfully")
+			toast.success(
+				isExpired ? "Session expired. Please log in again." : "User logged out successfully",
+			)
 			router.push("/")
 		})()
 
@@ -42,7 +44,9 @@ export function LogoutContent({ isExpired }: LogoutContentProps) {
 					{isExpired ? "Sessão expirada" : "Encerrando sessão"}
 				</h1>
 				<p className="mt-3 text-sm text-slate-300">
-					{isExpired ? "Redirecionando para a tela inicial." : "Estamos finalizando seu acesso com segurança."}
+					{isExpired
+						? "Redirecionando para a tela inicial."
+						: "Estamos finalizando seu acesso com segurança."}
 				</p>
 			</div>
 		</main>

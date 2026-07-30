@@ -65,6 +65,7 @@ src/
 ### 2. Feature-Based Organization
 
 Each module (auth, users, etc.) contains:
+
 - Shared request/response schemas for API boundaries
 - Server-only classes for business logic
 - Barrel exports for clean imports
@@ -117,6 +118,7 @@ import { AuthSession } from "@/modules/auth"
 6. Add pages in `app/` that use the feature
 
 Example:
+
 ```
 modules/
 └── products/
