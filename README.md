@@ -126,8 +126,8 @@ This project follows clean architecture principles with a well-organized structu
 │   │   ├── auth/         # Auth-related components (forms, content)
 │   │   ├── home/         # Home page components
 │   │   └── profile/      # Profile page components
-│   ├── features/         # Business Logic by Feature
-│   │   └── auth/        # Authentication schemas and server-only services
+│   ├── modules/          # Business Logic by Domain
+│   │   └── auth/        # Authentication schemas, services, sessions and types
 │   ├── lib/             # Shared Utilities & Infrastructure
 │   │   ├── utils/       # Utility functions (validators, etc.)
 │   │   ├── auth.ts      # Authentication utilities
@@ -197,29 +197,31 @@ The template uses NextUI components with Tailwind CSS. You can customize:
 
 The project structure makes it easy to add new features:
 
-1. **Create a new feature service** in `src/features/your-feature/`:
+1. **Create a new module service** in `src/modules/your-module/`:
 ```typescript
-// src/features/products/service.ts
+// src/modules/products/product-service.ts
 import "server-only"
 import db from "@/lib/db"
 
-export async function getProducts() {
-  return await db.product.findMany()
+export class ProductService {
+  static async list() {
+    return db.product.findMany()
+  }
 }
 ```
 
-2. **Add exports** in `src/features/products/index.ts`:
+2. **Add exports** in `src/modules/products/index.ts`:
 ```typescript
-export { getProducts } from "./service"
+export { ProductService } from "./product-service"
 ```
 
 3. **Expose a Route Handler** in `src/app/api/products/route.ts`:
 ```typescript
 import { NextResponse } from "next/server"
-import { getProducts } from "@/features/products"
+import { ProductService } from "@/modules/products"
 
 export async function GET() {
-  return NextResponse.json({ success: true, data: await getProducts() })
+  return NextResponse.json({ success: true, data: await ProductService.list() })
 }
 ```
 
@@ -237,11 +239,11 @@ export function ProductList({ products }) {
 5. **Use in pages** with clean imports:
 ```typescript
 // src/app/products/page.tsx
-import { getProducts } from "@/features/products"
+import { ProductService } from "@/modules/products"
 import { ProductList } from "@/components/products"
 
 export default async function ProductsPage() {
-  const products = await getProducts()
+  const products = await ProductService.list()
   return <ProductList products={products} />
 }
 ```
@@ -261,15 +263,15 @@ The clean architecture allows for intuitive imports:
 
 ```typescript
 // Typed API client
-import { apiClient } from "@/lib/api-client"
+import { ApiClient } from "@/lib/api-client"
 
 // Components
 import { LoginForm, RegisterForm } from "@/components/auth"
 import { ProfileContent } from "@/components/profile"
 
 // Utilities
-import { isEmail } from "@/lib/utils"
-import { requireUser } from "@/lib/auth"
+import { Validator } from "@/lib/utils"
+import { AuthSession } from "@/modules/auth"
 import db from "@/lib/db"
 ```
 

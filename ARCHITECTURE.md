@@ -32,17 +32,21 @@ src/
 │       ├── profile-content.tsx
 │       └── index.ts
 │
-├── features/             # Business Logic by Feature
-│   └── auth/            # Authentication feature
+├── modules/              # Business Logic by Domain
+│   └── auth/            # Authentication module
+│       ├── auth-service.ts
+│       ├── auth-session.ts
 │       ├── schemas.ts   # Shared API contracts
-│       ├── service.ts   # Server-only business logic
+│       ├── types.ts
 │       └── index.ts     # Barrel export
 │
 ├── lib/                 # Shared Utilities and Infrastructure
 │   ├── utils/          # Utility functions
 │   │   ├── validators.ts
 │   │   └── index.ts
-│   ├── auth.ts         # Authentication utilities
+│   ├── api-client.ts   # Typed frontend API client
+│   ├── api-result.ts   # Result and type guard classes
+│   ├── api-response.ts # API response helpers
 │   ├── db.ts           # Database connection (Prisma)
 │   └── password.ts     # Password hashing utilities
 │
@@ -55,14 +59,14 @@ src/
 
 - **app/**: Route definitions and page components (thin layer)
 - **components/**: Reusable UI components
-- **features/**: Business logic organized by domain
+- **modules/**: Business logic organized by domain
 - **lib/**: Shared utilities and infrastructure
 
 ### 2. Feature-Based Organization
 
-Each feature (auth, users, etc.) contains:
+Each module (auth, users, etc.) contains:
 - Shared request/response schemas for API boundaries
-- Server-only services for business logic
+- Server-only classes for business logic
 - Barrel exports for clean imports
 
 ### 3. Clean Code Practices
@@ -83,16 +87,16 @@ Each feature (auth, users, etc.) contains:
 ```typescript
 // Clean imports using barrel exports
 import { LoginContent, LoginForm } from "@/components/auth"
-import { apiClient } from "@/lib/api-client"
-import { isEmail } from "@/lib/utils"
-import { requireUser } from "@/lib/auth"
+import { ApiClient } from "@/lib/api-client"
+import { Validator } from "@/lib/utils"
+import { AuthSession } from "@/modules/auth"
 ```
 
 ## File Naming Conventions
 
 - **Components**: `component-name.tsx` (e.g., `login-form.tsx`)
 - **Route Handlers**: `route.ts` inside `app/api/**`
-- **Services**: `service.ts` inside each feature when business logic is needed
+- **Services**: `domain-service.ts` inside each module when business logic is needed
 - **Utilities**: `utility-name.ts` (e.g., `validators.ts`)
 - **Exports**: `index.ts` in each folder for barrel exports
 
@@ -106,8 +110,8 @@ import { requireUser } from "@/lib/auth"
 
 ## Adding New Features
 
-1. Create a new folder in `features/` with your feature name
-2. Add shared schemas and server-only services
+1. Create a new folder in `modules/` with your domain name
+2. Add shared schemas and server-only classes
 3. Expose Route Handlers in `app/api/**`
 4. Create an `index.ts` for exports
 5. Add related UI components in `components/` if needed
@@ -115,16 +119,17 @@ import { requireUser } from "@/lib/auth"
 
 Example:
 ```
-features/
+modules/
 └── products/
     ├── schemas.ts
-    ├── service.ts
+    ├── product-service.ts
     └── index.ts
 ```
 
 ## Best Practices
 
-- Keep business logic in server-only feature services
+- Keep business logic in server-only module classes
+- Group helper behavior in responsibility-based classes such as `AuthService`, `AuthSession`, `ApiResult` and `TypeGuard`
 - Use typed Route Handlers for frontend mutations and client-side reads
 - Keep UI components in `components/`
 - Use server components by default, client components when needed

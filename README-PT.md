@@ -260,15 +260,15 @@ A clean architecture permite imports intuitivos:
 
 ```typescript
 // Cliente de API tipado
-import { apiClient } from "@/lib/api-client"
+import { ApiClient } from "@/lib/api-client"
 
 // Componentes
 import { LoginForm, RegisterForm } from "@/components/auth"
 import { ProfileContent } from "@/components/profile"
 
 // Utilitários
-import { isEmail } from "@/lib/utils"
-import { requireUser } from "@/lib/auth"
+import { Validator } from "@/lib/utils"
+import { AuthSession } from "@/modules/auth"
 import db from "@/lib/db"
 ```
 
