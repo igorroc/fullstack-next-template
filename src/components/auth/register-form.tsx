@@ -43,39 +43,54 @@ export function RegisterForm() {
 		<form onSubmit={registerClient} className="flex flex-col gap-4">
 			<Input
 				type="text"
-				label="Name"
-				placeholder="Enter your name"
+				label="Nome"
+				placeholder="Seu nome"
 				name="name"
 				isRequired
 				variant="bordered"
+				classNames={{
+					inputWrapper: "border-white/25 bg-slate-900/30 hover:border-fuchsia-300/60 group-data-[focus=true]:border-fuchsia-300",
+					label: "text-slate-200 group-data-[filled-within=true]:text-fuchsia-100",
+					input: "text-white placeholder:text-slate-400",
+				}}
 				isDisabled={isLoading}
 			/>
 			<Input
 				type="email"
 				label="Email"
-				placeholder="Enter your email"
+				placeholder="voce@email.com"
 				name="email"
 				isRequired
 				variant="bordered"
+				classNames={{
+					inputWrapper: "border-white/25 bg-slate-900/30 hover:border-fuchsia-300/60 group-data-[focus=true]:border-fuchsia-300",
+					label: "text-slate-200 group-data-[filled-within=true]:text-fuchsia-100",
+					input: "text-white placeholder:text-slate-400",
+				}}
 				isDisabled={isLoading}
 			/>
 			<Input
 				type="password"
-				label="Password"
-				placeholder="Enter your password"
+				label="Senha"
+				placeholder="Crie uma senha segura"
 				name="password"
 				isRequired
 				variant="bordered"
+				classNames={{
+					inputWrapper: "border-white/25 bg-slate-900/30 hover:border-fuchsia-300/60 group-data-[focus=true]:border-fuchsia-300",
+					label: "text-slate-200 group-data-[filled-within=true]:text-fuchsia-100",
+					input: "text-white placeholder:text-slate-400",
+				}}
 				isDisabled={isLoading}
 			/>
 			<Button
 				type="submit"
 				color="secondary"
 				size="lg"
-				className="mt-2"
+				className="mt-2 font-semibold"
 				isLoading={isLoading}
 			>
-				Register
+				Criar conta
 			</Button>
 		</form>
 	)

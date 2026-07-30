@@ -35,8 +35,16 @@ export function LogoutContent({ isExpired }: LogoutContentProps) {
 	}, [])
 
 	return (
-		<main className="flex min-h-dvh flex-col items-center justify-center p-24">
-			<h1 className="text-2xl font-bold">{isExpired ? "Session expired..." : "Logging out..."}</h1>
+		<main className="flex min-h-dvh flex-col items-center justify-center px-6 py-12 text-center">
+			<div className="rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
+				<div className="mx-auto mb-5 h-12 w-12 animate-pulse rounded-full bg-sky-300/30 ring-8 ring-sky-300/10" />
+				<h1 className="text-3xl font-black text-white">
+					{isExpired ? "Sessão expirada" : "Encerrando sessão"}
+				</h1>
+				<p className="mt-3 text-sm text-slate-300">
+					{isExpired ? "Redirecionando para a tela inicial." : "Estamos finalizando seu acesso com segurança."}
+				</p>
+			</div>
 		</main>
 	)
 }

@@ -43,29 +43,39 @@ export function LoginForm() {
 			<Input
 				type="email"
 				label="Email"
-				placeholder="Enter your email"
+				placeholder="voce@email.com"
 				name="email"
 				isRequired
 				variant="bordered"
+				classNames={{
+					inputWrapper: "border-white/25 bg-slate-900/30 hover:border-sky-300/60 group-data-[focus=true]:border-sky-300",
+					label: "text-slate-200 group-data-[filled-within=true]:text-sky-100",
+					input: "text-white placeholder:text-slate-400",
+				}}
 				isDisabled={isLoading}
 			/>
 			<Input
 				type="password"
-				label="Password"
-				placeholder="Enter your password"
+				label="Senha"
+				placeholder="Sua senha"
 				name="password"
 				isRequired
 				variant="bordered"
+				classNames={{
+					inputWrapper: "border-white/25 bg-slate-900/30 hover:border-sky-300/60 group-data-[focus=true]:border-sky-300",
+					label: "text-slate-200 group-data-[filled-within=true]:text-sky-100",
+					input: "text-white placeholder:text-slate-400",
+				}}
 				isDisabled={isLoading}
 			/>
 			<Button
 				type="submit"
 				color="primary"
 				size="lg"
-				className="mt-2"
+				className="mt-2 font-semibold"
 				isLoading={isLoading}
 			>
-				Login
+				Entrar
 			</Button>
 		</form>
 	)

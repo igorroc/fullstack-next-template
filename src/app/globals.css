@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 body {
-	color: #fff;
-	background: linear-gradient(to bottom, #1b1b1b, #191919);
+	min-height: 100dvh;
+	color: #f8fafc;
+	background:
+		radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), transparent 32rem),
+		radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.2), transparent 30rem),
+		linear-gradient(135deg, #020617 0%, #111827 50%, #172554 100%);
 }
 
 @layer utilities {
