@@ -1,4 +1,4 @@
-"use server"
+import "server-only"
 
 import { createHash, randomBytes } from "crypto"
 import { cookies } from "next/headers"
