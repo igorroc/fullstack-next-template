@@ -1,3 +1,2 @@
-export { loginAction } from "./login"
-export { logoutAction } from "./logout"
-export { registerAction } from "./register"
+export type { AuthError, AuthResponse, LoginRequest, RegisterRequest } from "./schemas"
+export { loginRequestSchema, registerRequestSchema } from "./schemas"

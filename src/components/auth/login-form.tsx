@@ -2,30 +2,44 @@
 
 import { Input, Button } from "@nextui-org/react"
 import { toast } from "react-toastify"
-import { loginAction } from "@/features/auth/login"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+
+import { apiClient } from "@/lib/api-client"
+import { isFailure } from "@/lib/api-result"
 
 export function LoginForm() {
 	const [isLoading, setIsLoading] = useState(false)
+	const router = useRouter()
 
-	async function loginClient(formData: FormData) {
+	async function loginClient(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault()
 		setIsLoading(true)
-		try {
-			const res = await loginAction(formData)
 
-			if (res && "error" in res) {
-				toast.error(res.error)
+		const formData = new FormData(event.currentTarget)
+
+		try {
+			const res = await apiClient.login({
+				email: String(formData.get("email") ?? ""),
+				password: String(formData.get("password") ?? ""),
+			})
+
+			if (isFailure(res)) {
+				toast.error(res.error.message)
 				setIsLoading(false)
+				return
 			}
-			// Se não houver erro, o redirect() na action vai redirecionar automaticamente
-		} catch (error) {
-			// O redirect() lança uma exceção que é capturada pelo Next.js
-			// Não precisa fazer nada aqui
+
+			router.push("/profile")
+			router.refresh()
+		} catch {
+			toast.error("Something went wrong. Please try again later.")
+			setIsLoading(false)
 		}
 	}
 
 	return (
-		<form action={loginClient} className="flex flex-col gap-4">
+		<form onSubmit={loginClient} className="flex flex-col gap-4">
 			<Input
 				type="email"
 				label="Email"
