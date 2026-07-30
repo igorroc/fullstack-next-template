@@ -122,7 +122,7 @@ export async function requireUser(): Promise<CurrentUser> {
 	const user = await getCurrentUser()
 
 	if (!user) {
-		redirect("/auth/login")
+		redirect("/auth/logout?reason=expired")
 	}
 
 	return user
