@@ -16,6 +16,7 @@ export class ApiClient {
 	private static async postJson<TRequest, TResponse>(url: string, body?: TRequest): Promise<TResponse> {
 		const response = await fetch(url, {
 			method: "POST",
+			credentials: "same-origin",
 			headers: {
 				"Content-Type": "application/json",
 			},
