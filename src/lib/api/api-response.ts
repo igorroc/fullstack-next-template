@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { ApiResult } from "@/lib/api-result"
+import { ApiResult } from "@/lib/api/api-result"
 import type { AuthError, AuthResponse } from "@/modules/auth/schemas"
 
 type ErrorCode = AuthError["code"]

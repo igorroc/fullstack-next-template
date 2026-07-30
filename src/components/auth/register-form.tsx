@@ -5,8 +5,8 @@ import { toast } from "react-toastify"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-import { ApiClient } from "@/lib/api-client"
-import { TypeGuard } from "@/lib/api-result"
+import { ApiClient } from "@/lib/api/api-client"
+import { TypeGuard } from "@/lib/api/api-result"
 
 export function RegisterForm() {
 	const [isLoading, setIsLoading] = useState(false)

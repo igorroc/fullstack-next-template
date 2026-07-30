@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 
-import { ApiClient } from "@/lib/api-client"
-import { TypeGuard } from "@/lib/api-result"
+import { ApiClient } from "@/lib/api/api-client"
+import { TypeGuard } from "@/lib/api/api-result"
 
 type LogoutContentProps = {
 	isExpired: boolean

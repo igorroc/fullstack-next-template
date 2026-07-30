@@ -1,8 +1,8 @@
 import "server-only"
 
 import db from "@/lib/db"
-import { PasswordService } from "@/lib/password"
-import { ApiResult, type ApiResultType } from "@/lib/api-result"
+import { PasswordService } from "@/lib/auth/password"
+import { ApiResult, type ApiResultType } from "@/lib/api/api-result"
 import { AuthSession } from "@/modules/auth/auth-session"
 import type { AuthError, LoginRequest, RegisterRequest } from "@/modules/auth/schemas"
 

@@ -1,6 +1,6 @@
 import { AuthService, registerRequestSchema } from "@/modules/auth"
-import { ApiResponse } from "@/lib/api-response"
-import { TypeGuard } from "@/lib/api-result"
+import { ApiResponse } from "@/lib/api/api-response"
+import { TypeGuard } from "@/lib/api/api-result"
 
 export async function POST(request: Request) {
 	const body = await request.json().catch(() => null)

@@ -1,5 +1,5 @@
 import { AuthService } from "@/modules/auth"
-import { ApiResponse } from "@/lib/api-response"
+import { ApiResponse } from "@/lib/api/api-response"
 
 export async function POST() {
 	try {

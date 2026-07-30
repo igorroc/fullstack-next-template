@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server"
 
-import { SessionCookie } from "./lib/session-cookie"
+import { SessionCookie } from "./lib/auth/session-cookie"
 
 export async function proxy(request: NextRequest) {
 	if (

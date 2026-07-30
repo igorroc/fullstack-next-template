@@ -1,5 +1,5 @@
 import { z } from "zod"
-import type { ApiResultType } from "@/lib/api-result"
+import type { ApiResultType } from "@/lib/api/api-result"
 
 export const loginRequestSchema = z.object({
 	email: z.email("Please enter a valid email").trim().max(255),
