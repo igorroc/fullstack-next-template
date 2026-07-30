@@ -32,14 +32,11 @@ src/
 │       └── index.ts
 │
 ├── features/             # Business Logic by Feature (Server Actions)
-│   ├── auth/            # Authentication feature
-│   │   ├── login.ts     # Login action
-│   │   ├── logout.ts    # Logout action
-│   │   ├── register.ts  # Register action
-│   │   └── index.ts     # Barrel export
-│   └── users/           # Users feature
-│       ├── get-all-users.ts
-│       └── index.ts
+│   └── auth/            # Authentication feature
+│       ├── login.ts     # Login action
+│       ├── logout.ts    # Logout action
+│       ├── register.ts  # Register action
+│       └── index.ts     # Barrel export
 │
 ├── lib/                 # Shared Utilities and Infrastructure
 │   ├── utils/          # Utility functions
@@ -47,10 +44,9 @@ src/
 │   │   └── index.ts
 │   ├── auth.ts         # Authentication utilities
 │   ├── db.ts           # Database connection (Prisma)
-│   └── proxy.ts        # Middleware proxy
+│   └── password.ts     # Password hashing utilities
 │
-└── types/              # TypeScript type definitions
-    └── index.ts
+└── proxy.ts            # Route protection proxy
 ```
 
 ## Architecture Principles
@@ -88,7 +84,6 @@ Each feature (auth, users, etc.) contains:
 // Clean imports using barrel exports
 import { LoginContent, LoginForm } from "@/components/auth"
 import { loginAction, logoutAction } from "@/features/auth"
-import { getAllUsers } from "@/features/users"
 import { isEmail } from "@/lib/utils"
 import { getUserBySession } from "@/lib/auth"
 ```
@@ -96,7 +91,7 @@ import { getUserBySession } from "@/lib/auth"
 ## File Naming Conventions
 
 - **Components**: `component-name.tsx` (e.g., `login-form.tsx`)
-- **Actions**: `action-name.ts` (e.g., `get-all-users.ts`)
+- **Actions**: `action-name.ts` (e.g., `create-product.ts`)
 - **Utilities**: `utility-name.ts` (e.g., `validators.ts`)
 - **Exports**: `index.ts` in each folder for barrel exports
 
