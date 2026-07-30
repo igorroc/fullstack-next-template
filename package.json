@@ -39,7 +39,6 @@
 		"@node-rs/argon2": "^2.0.2",
 		"@prisma/client": "^5.22.0",
 		"framer-motion": "^12.43.0",
-		"jose": "^5.10.0",
 		"next": "16.2.12",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
