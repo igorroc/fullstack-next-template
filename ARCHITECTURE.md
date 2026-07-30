@@ -88,7 +88,6 @@ Each module (auth, users, etc.) contains:
 // Clean imports using barrel exports
 import { LoginContent, LoginForm } from "@/components/auth"
 import { ApiClient } from "@/lib/api-client"
-import { Validator } from "@/lib/utils"
 import { AuthSession } from "@/modules/auth"
 ```
 

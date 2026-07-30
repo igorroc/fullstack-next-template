@@ -269,8 +269,7 @@ import { ApiClient } from "@/lib/api-client"
 import { LoginForm, RegisterForm } from "@/components/auth"
 import { ProfileContent } from "@/components/profile"
 
-// Utilities
-import { Validator } from "@/lib/utils"
+// Server utilities
 import { AuthSession } from "@/modules/auth"
 import db from "@/lib/db"
 ```
