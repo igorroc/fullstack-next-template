@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Button, Card, CardBody, CardHeader, Chip } from "@nextui-org/react"
+import { Card, Chip } from "@heroui/react"
 
 export function HomeContent() {
 	return (
@@ -10,10 +10,10 @@ export function HomeContent() {
 			<div className="absolute bottom-12 right-6 h-64 w-64 rounded-full bg-fuchsia-500/20 blur-3xl" />
 
 			<Card className="w-full max-w-3xl border border-white/15 bg-white/10 shadow-2xl shadow-sky-950/40 backdrop-blur-xl">
-				<CardHeader className="flex flex-col items-center gap-4 px-6 pb-2 pt-8 text-center sm:px-10">
+				<Card.Header className="flex flex-col items-center gap-4 px-6 pb-2 pt-8 text-center sm:px-10">
 					<Chip
-						color="primary"
-						variant="flat"
+						color="accent"
+						variant="soft"
 						className="border border-sky-300/20 bg-sky-400/10 text-sky-100"
 					>
 						Next.js 16 + Prisma + PostgreSQL
@@ -21,8 +21,8 @@ export function HomeContent() {
 					<h1 className="max-w-2xl text-4xl font-black tracking-tight text-white sm:text-6xl">
 						Seu ponto de partida para apps fullstack modernos
 					</h1>
-				</CardHeader>
-				<CardBody className="gap-8 px-6 pb-8 sm:px-10">
+				</Card.Header>
+				<Card.Content className="gap-8 px-6 pb-8 sm:px-10">
 					<p className="mx-auto max-w-2xl text-center text-base leading-7 text-slate-200 sm:text-lg">
 						Template pronto para evoluir seu produto com autenticação, banco de dados e uma base
 						visual mais acolhedora. Comece ajustando{" "}
@@ -47,30 +47,26 @@ export function HomeContent() {
 					</div>
 
 					<div className="flex flex-col justify-center gap-3 sm:flex-row">
-						<Button
-							as={Link}
+						<Link
 							href="/auth/login"
-							color="primary"
-							variant="shadow"
-							size="lg"
-							className="font-semibold"
+							className="rounded-2xl bg-sky-500 px-6 py-3 text-center font-semibold text-white shadow-lg shadow-sky-950/30 transition hover:bg-sky-400"
 						>
 							Entrar
-						</Button>
-						<Button as={Link} href="/auth/register" color="secondary" variant="shadow" size="lg">
+						</Link>
+						<Link
+							href="/auth/register"
+							className="rounded-2xl bg-fuchsia-500 px-6 py-3 text-center font-semibold text-white shadow-lg shadow-fuchsia-950/30 transition hover:bg-fuchsia-400"
+						>
 							Criar conta
-						</Button>
-						<Button
-							as={Link}
+						</Link>
+						<Link
 							href="/profile"
-							variant="bordered"
-							size="lg"
-							className="border-white/60 bg-white/5 font-semibold text-slate-100 hover:bg-white/10"
+							className="rounded-2xl border border-white/60 bg-white/5 px-6 py-3 text-center font-semibold text-slate-100 transition hover:bg-white/10"
 						>
 							Ver perfil
-						</Button>
+						</Link>
 					</div>
-				</CardBody>
+				</Card.Content>
 			</Card>
 		</main>
 	)

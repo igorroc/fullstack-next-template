@@ -1,6 +1,6 @@
 "use client"
 
-import { Input, Button } from "@nextui-org/react"
+import { Input, Button } from "@heroui/react"
 import { toast } from "react-toastify"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -43,55 +43,40 @@ export function RegisterForm() {
 		<form onSubmit={registerClient} className="flex flex-col gap-4">
 			<Input
 				type="text"
-				label="Nome"
+				aria-label="Nome"
 				placeholder="Seu nome"
 				name="name"
-				isRequired
-				variant="bordered"
-				classNames={{
-					inputWrapper:
-						"border-white/25 bg-slate-900/30 hover:border-fuchsia-300/60 group-data-[focus=true]:border-fuchsia-300",
-					label: "text-slate-200 group-data-[filled-within=true]:text-fuchsia-100",
-					input: "text-white placeholder:text-slate-400",
-				}}
-				isDisabled={isLoading}
+				required
+				variant="secondary"
+				className="text-white placeholder:text-slate-400"
+				disabled={isLoading}
 			/>
 			<Input
 				type="email"
-				label="Email"
+				aria-label="Email"
 				placeholder="voce@email.com"
 				name="email"
-				isRequired
-				variant="bordered"
-				classNames={{
-					inputWrapper:
-						"border-white/25 bg-slate-900/30 hover:border-fuchsia-300/60 group-data-[focus=true]:border-fuchsia-300",
-					label: "text-slate-200 group-data-[filled-within=true]:text-fuchsia-100",
-					input: "text-white placeholder:text-slate-400",
-				}}
-				isDisabled={isLoading}
+				required
+				variant="secondary"
+				className="text-white placeholder:text-slate-400"
+				disabled={isLoading}
 			/>
 			<Input
 				type="password"
-				label="Senha"
+				aria-label="Senha"
 				placeholder="Crie uma senha segura"
 				name="password"
-				isRequired
-				variant="bordered"
-				classNames={{
-					inputWrapper:
-						"border-white/25 bg-slate-900/30 hover:border-fuchsia-300/60 group-data-[focus=true]:border-fuchsia-300",
-					label: "text-slate-200 group-data-[filled-within=true]:text-fuchsia-100",
-					input: "text-white placeholder:text-slate-400",
-				}}
-				isDisabled={isLoading}
+				required
+				variant="secondary"
+				className="text-white placeholder:text-slate-400"
+				disabled={isLoading}
 			/>
 			<Button
 				type="submit"
-				color="secondary"
+				variant="secondary"
 				size="lg"
 				className="mt-2 font-semibold"
-				isLoading={isLoading}
+				isDisabled={isLoading}
 			>
 				Criar conta
 			</Button>
