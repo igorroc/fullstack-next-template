@@ -8,7 +8,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Next.js 16** - A versão mais recente do Next.js com App Router
 - **TypeScript** - Desenvolvimento totalmente type-safe
 - **Clean Architecture** - Estrutura de pastas bem organizada seguindo as melhores práticas
-- **Autenticação** - Sistema completo de autenticação com proteção via middleware e login automático após registro
+- **Autenticação** - Sistema completo de autenticação com rotas protegidas e login automático após registro
 - **Banco de Dados** - PostgreSQL com Prisma ORM
 - **Componentes UI** - NextUI (baseado em Tailwind CSS) para componentes modernos e acessíveis
 - **Docker** - Banco de dados PostgreSQL containerizado
@@ -18,7 +18,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Página Inicial** - Página de boas-vindas com navegação para páginas de autenticação
 - **Login** - Autenticação de usuário com redirecionamento automático para o perfil
 - **Registro** - Registro de usuário com login automático
-- **Perfil** - Página protegida mostrando informações do usuário e lista de todos os usuários registrados
+- **Perfil** - Página protegida mostrando informações do usuário autenticado
 - **Logout** - Logout seguro com redirecionamento para a home
 
 ## Tecnologias
@@ -127,14 +127,13 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 │   │   ├── home/         # Componentes da página inicial
 │   │   └── profile/      # Componentes da página de perfil
 │   ├── features/         # Lógica de Negócio por Feature
-│   │   ├── auth/        # Actions de autenticação (login, register, logout)
-│   │   └── users/       # Actions relacionadas a usuários
+│   │   └── auth/        # Actions de autenticação (login, register, logout)
 │   ├── lib/             # Utilitários e Infraestrutura Compartilhados
 │   │   ├── utils/       # Funções utilitárias (validators, etc.)
 │   │   ├── auth.ts      # Utilitários de autenticação
 │   │   ├── db.ts        # Conexão com banco de dados (Prisma)
-│   │   └── proxy.ts     # Proxy do middleware
-│   └── types/           # Definições de tipos TypeScript
+│   │   └── password.ts  # Utilitários de hash de senha
+│   └── proxy.ts         # Proxy de proteção de rotas
 ├── prisma/
 │   └── schema.prisma    # Schema do banco de dados
 └── public/              # Arquivos estáticos
@@ -155,7 +154,7 @@ O template inclui um sistema completo de autenticação:
 - **Registro** - `/auth/register`
 - **Login** - `/auth/login`
 - **Logout** - `/auth/logout`
-- **Rotas Protegidas** - Usando middleware do Next.js
+- **Rotas Protegidas** - Usando Proxy do Next.js
 - **Gerenciamento de Sessão** - Sessões baseadas em JWT
 
 ## Banco de Dados
@@ -253,7 +252,6 @@ A clean architecture permite imports intuitivos:
 ```typescript
 // Features (Server Actions)
 import { loginAction, registerAction } from "@/features/auth"
-import { getAllUsers } from "@/features/users"
 
 // Componentes
 import { LoginForm, RegisterForm } from "@/components/auth"
