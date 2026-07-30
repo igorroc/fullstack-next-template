@@ -12,7 +12,7 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 - **Banco de Dados** - PostgreSQL com Prisma ORM
 - **Componentes UI** - NextUI (baseado em Tailwind CSS) para componentes modernos e acessíveis
 - **Docker** - Banco de dados PostgreSQL containerizado
-- **Manipulação de Formulários** - Server Actions com estados de loading e tratamento de erros
+- **Rotas de API Tipadas** - Route Handlers com schemas compartilhados, cliente tipado, estados de loading e tratamento de erros
 
 ### Páginas Implementadas
 - **Página Inicial** - Página de boas-vindas com navegação para páginas de autenticação
@@ -115,7 +115,8 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 ```
 ├── src/
 │   ├── app/                # Next.js App Router (Camada de Apresentação)
-│   │   ├── auth/          # Rotas de autenticação (login, register, logout)
+│   │   ├── auth/          # Páginas de autenticação (login, register, logout)
+│   │   ├── api/           # Route Handlers tipados
 │   │   ├── profile/       # Página de perfil protegida
 │   │   ├── layout.tsx     # Layout raiz
 │   │   ├── page.tsx       # Página inicial
@@ -125,7 +126,7 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 │   │   ├── home/         # Componentes da página inicial
 │   │   └── profile/      # Componentes da página de perfil
 │   ├── features/         # Lógica de Negócio por Feature
-│   │   └── auth/        # Actions de autenticação (login, register, logout)
+│   │   └── auth/        # Schemas e services server-only de autenticação
 │   ├── lib/             # Utilitários e Infraestrutura Compartilhados
 │   │   ├── utils/       # Funções utilitárias (validators, etc.)
 │   │   ├── auth.ts      # Utilitários de autenticação
@@ -195,10 +196,10 @@ O template usa componentes NextUI com Tailwind CSS. Você pode customizar:
 
 A estrutura do projeto facilita a adição de novas funcionalidades:
 
-1. **Crie uma nova feature** em `src/features/sua-feature/`:
+1. **Crie um service da feature** em `src/features/sua-feature/`:
 ```typescript
-// src/features/produtos/get-produtos.ts
-"use server"
+// src/features/produtos/service.ts
+import "server-only"
 import db from "@/lib/db"
 
 export async function getProdutos() {
@@ -208,10 +209,20 @@ export async function getProdutos() {
 
 2. **Adicione exports** em `src/features/produtos/index.ts`:
 ```typescript
-export { getProdutos } from "./get-produtos"
+export { getProdutos } from "./service"
 ```
 
-3. **Crie componentes UI** em `src/components/produtos/`:
+3. **Exponha um Route Handler** em `src/app/api/produtos/route.ts`:
+```typescript
+import { NextResponse } from "next/server"
+import { getProdutos } from "@/features/produtos"
+
+export async function GET() {
+  return NextResponse.json({ success: true, data: await getProdutos() })
+}
+```
+
+4. **Crie componentes UI** em `src/components/produtos/`:
 ```typescript
 // src/components/produtos/lista-produtos.tsx
 "use client"
@@ -222,7 +233,7 @@ export function ListaProdutos({ produtos }) {
 }
 ```
 
-4. **Use nas páginas** com imports limpos:
+5. **Use nas páginas** com imports limpos:
 ```typescript
 // src/app/produtos/page.tsx
 import { getProdutos } from "@/features/produtos"
@@ -248,8 +259,8 @@ bun run migrate              # Aplica as migrações
 A clean architecture permite imports intuitivos:
 
 ```typescript
-// Features (Server Actions)
-import { loginAction, registerAction } from "@/features/auth"
+// Cliente de API tipado
+import { apiClient } from "@/lib/api-client"
 
 // Componentes
 import { LoginForm, RegisterForm } from "@/components/auth"

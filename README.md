@@ -12,7 +12,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 - **Database** - PostgreSQL with Prisma ORM
 - **UI Components** - NextUI (based on Tailwind CSS) for modern, accessible components
 - **Docker** - Containerized PostgreSQL database
-- **Form Handling** - Server Actions with loading states and error handling
+- **Typed API Routes** - Route Handlers with shared schemas, typed client calls, loading states, and error handling
 
 ### Implemented Pages
 - **Home Page** - Welcome page with navigation to auth pages
@@ -32,6 +32,7 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 - **Docker** - Platform for containerized applications
 - **Argon2id** - Password hashing
 - **Opaque Sessions** - Database-backed session management
+- **Zod** - Runtime validation and shared API contracts
 
 ## Getting Started
 
@@ -115,7 +116,8 @@ This project follows clean architecture principles with a well-organized structu
 ```
 ├── src/
 │   ├── app/                # Next.js App Router (Presentation Layer)
-│   │   ├── auth/          # Authentication routes (login, register, logout)
+│   │   ├── auth/          # Authentication pages (login, register, logout)
+│   │   ├── api/           # Typed Route Handlers
 │   │   ├── profile/       # Protected profile page
 │   │   ├── layout.tsx     # Root layout
 │   │   ├── page.tsx       # Home page
@@ -125,7 +127,7 @@ This project follows clean architecture principles with a well-organized structu
 │   │   ├── home/         # Home page components
 │   │   └── profile/      # Profile page components
 │   ├── features/         # Business Logic by Feature
-│   │   └── auth/        # Authentication actions (login, register, logout)
+│   │   └── auth/        # Authentication schemas and server-only services
 │   ├── lib/             # Shared Utilities & Infrastructure
 │   │   ├── utils/       # Utility functions (validators, etc.)
 │   │   ├── auth.ts      # Authentication utilities
@@ -195,10 +197,10 @@ The template uses NextUI components with Tailwind CSS. You can customize:
 
 The project structure makes it easy to add new features:
 
-1. **Create a new feature** in `src/features/your-feature/`:
+1. **Create a new feature service** in `src/features/your-feature/`:
 ```typescript
-// src/features/products/get-products.ts
-"use server"
+// src/features/products/service.ts
+import "server-only"
 import db from "@/lib/db"
 
 export async function getProducts() {
@@ -208,10 +210,20 @@ export async function getProducts() {
 
 2. **Add exports** in `src/features/products/index.ts`:
 ```typescript
-export { getProducts } from "./get-products"
+export { getProducts } from "./service"
 ```
 
-3. **Create UI components** in `src/components/products/`:
+3. **Expose a Route Handler** in `src/app/api/products/route.ts`:
+```typescript
+import { NextResponse } from "next/server"
+import { getProducts } from "@/features/products"
+
+export async function GET() {
+  return NextResponse.json({ success: true, data: await getProducts() })
+}
+```
+
+4. **Create UI components** in `src/components/products/`:
 ```typescript
 // src/components/products/product-list.tsx
 "use client"
@@ -222,7 +234,7 @@ export function ProductList({ products }) {
 }
 ```
 
-4. **Use in pages** with clean imports:
+5. **Use in pages** with clean imports:
 ```typescript
 // src/app/products/page.tsx
 import { getProducts } from "@/features/products"
@@ -248,8 +260,8 @@ bun run migrate              # Apply migrations
 The clean architecture allows for intuitive imports:
 
 ```typescript
-// Features (Server Actions)
-import { loginAction, registerAction } from "@/features/auth"
+// Typed API client
+import { apiClient } from "@/lib/api-client"
 
 // Components
 import { LoginForm, RegisterForm } from "@/components/auth"

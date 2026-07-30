@@ -7,7 +7,8 @@ This project follows clean architecture principles with a well-organized folder 
 ```
 src/
 ├── app/                    # Next.js App Router (Presentation Layer)
-│   ├── auth/              # Authentication routes
+│   ├── api/               # Typed Route Handlers
+│   ├── auth/              # Authentication pages
 │   │   ├── login/         # Login page
 │   │   ├── logout/        # Logout page
 │   │   └── register/      # Register page
@@ -31,11 +32,10 @@ src/
 │       ├── profile-content.tsx
 │       └── index.ts
 │
-├── features/             # Business Logic by Feature (Server Actions)
+├── features/             # Business Logic by Feature
 │   └── auth/            # Authentication feature
-│       ├── login.ts     # Login action
-│       ├── logout.ts    # Logout action
-│       ├── register.ts  # Register action
+│       ├── schemas.ts   # Shared API contracts
+│       ├── service.ts   # Server-only business logic
 │       └── index.ts     # Barrel export
 │
 ├── lib/                 # Shared Utilities and Infrastructure
@@ -61,8 +61,8 @@ src/
 ### 2. Feature-Based Organization
 
 Each feature (auth, users, etc.) contains:
-- Server actions for data mutations
-- Related business logic
+- Shared request/response schemas for API boundaries
+- Server-only services for business logic
 - Barrel exports for clean imports
 
 ### 3. Clean Code Practices
@@ -83,7 +83,7 @@ Each feature (auth, users, etc.) contains:
 ```typescript
 // Clean imports using barrel exports
 import { LoginContent, LoginForm } from "@/components/auth"
-import { loginAction, logoutAction } from "@/features/auth"
+import { apiClient } from "@/lib/api-client"
 import { isEmail } from "@/lib/utils"
 import { requireUser } from "@/lib/auth"
 ```
@@ -91,7 +91,8 @@ import { requireUser } from "@/lib/auth"
 ## File Naming Conventions
 
 - **Components**: `component-name.tsx` (e.g., `login-form.tsx`)
-- **Actions**: `action-name.ts` (e.g., `create-product.ts`)
+- **Route Handlers**: `route.ts` inside `app/api/**`
+- **Services**: `service.ts` inside each feature when business logic is needed
 - **Utilities**: `utility-name.ts` (e.g., `validators.ts`)
 - **Exports**: `index.ts` in each folder for barrel exports
 
@@ -106,24 +107,25 @@ import { requireUser } from "@/lib/auth"
 ## Adding New Features
 
 1. Create a new folder in `features/` with your feature name
-2. Add your server actions
-3. Create an `index.ts` for exports
-4. Add related UI components in `components/` if needed
-5. Add pages in `app/` that use the feature
+2. Add shared schemas and server-only services
+3. Expose Route Handlers in `app/api/**`
+4. Create an `index.ts` for exports
+5. Add related UI components in `components/` if needed
+6. Add pages in `app/` that use the feature
 
 Example:
 ```
 features/
 └── products/
-    ├── get-products.ts
-    ├── create-product.ts
-    ├── update-product.ts
+    ├── schemas.ts
+    ├── service.ts
     └── index.ts
 ```
 
 ## Best Practices
 
-- Keep server actions in `features/`
+- Keep business logic in server-only feature services
+- Use typed Route Handlers for frontend mutations and client-side reads
 - Keep UI components in `components/`
 - Use server components by default, client components when needed
 - Always export through index files for clean imports
