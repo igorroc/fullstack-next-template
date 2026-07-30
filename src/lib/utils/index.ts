@@ -1,1 +1,1 @@
-export { isEmail } from "./validators"
+export { Validator } from "./validators"

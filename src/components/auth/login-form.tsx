@@ -5,8 +5,8 @@ import { toast } from "react-toastify"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-import { apiClient } from "@/lib/api-client"
-import { isFailure } from "@/lib/api-result"
+import { ApiClient } from "@/lib/api-client"
+import { TypeGuard } from "@/lib/api-result"
 
 export function LoginForm() {
 	const [isLoading, setIsLoading] = useState(false)
@@ -19,12 +19,12 @@ export function LoginForm() {
 		const formData = new FormData(event.currentTarget)
 
 		try {
-			const res = await apiClient.login({
+			const res = await ApiClient.login({
 				email: String(formData.get("email") ?? ""),
 				password: String(formData.get("password") ?? ""),
 			})
 
-			if (isFailure(res)) {
+			if (TypeGuard.isFailure(res)) {
 				toast.error(res.error.message)
 				setIsLoading(false)
 				return

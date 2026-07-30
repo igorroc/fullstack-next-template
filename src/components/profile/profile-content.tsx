@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react"
 import Link from "next/link"
 
-import type { CurrentUser } from "@/lib/auth-types"
+import type { CurrentUser } from "@/modules/auth"
 
 type ProfileContentProps = {
 	user: CurrentUser
