@@ -17,6 +17,7 @@
 		"migrate:reset": "bunx prisma migrate reset --force",
 		"migrate:create-only": "bunx prisma migrate dev --create-only",
 		"prisma:studio": "bunx prisma studio",
+		"security:audit": "bun audit --audit-level=moderate",
 		"ts-check": "tsc --noEmit"
 	},
 	"dependencies": {
