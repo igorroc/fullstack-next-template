@@ -23,6 +23,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
+		"check:production": "bun run format:check && bun run lint && bun run ts-check && bun run build",
 		"start": "next start",
 		"lint": "eslint . --max-warnings=0",
 		"format": "prettier . --write",
