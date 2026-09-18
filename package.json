@@ -39,29 +39,29 @@
 		"ts-check": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@heroui/react": "^3.2.2",
-		"@node-rs/argon2": "^2.0.2",
+		"@heroui/react": "3.2.6",
+		"@node-rs/argon2": "2.2.1",
 		"@prisma/client": "^5.22.0",
 		"framer-motion": "^12.43.0",
-		"next": "16.2.12",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
+		"next": "16.3.5",
+		"react": "19.3.0",
+		"react-dom": "19.3.0",
 		"react-toastify": "^10.0.6",
-		"zod": "^4.4.3"
+		"zod": "4.6.5"
 	},
 	"devDependencies": {
-		"@tailwindcss/postcss": "^4.1.16",
+		"@tailwindcss/postcss": "4.3.3",
 		"@types/node": "^20.19.43",
-		"@types/react": "^18.3.31",
-		"@types/react-dom": "^18.3.7",
+		"@types/react": "19",
+		"@types/react-dom": "19",
 		"autoprefixer": "^10.5.4",
 		"eslint": "^9",
-		"eslint-config-next": "16.2.12",
+		"eslint-config-next": "16.3.5",
 		"postcss": "^8.5.25",
 		"prettier": "^3.9.6",
 		"prettier-plugin-tailwindcss": "^0.8.1",
 		"prisma": "^5.22.0",
-		"tailwindcss": "^4.1.16",
+		"tailwindcss": "4.3.3",
 		"typescript": "^5.9.3"
 	}
 }
