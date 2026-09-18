@@ -25,15 +25,18 @@ Um template moderno e pronto para produção de Next.js fullstack com autentica�
 
 ## Tecnologias
 
-- **Next.js 16** - Framework React para produção
-- **TypeScript 5** - JavaScript com sintaxe para tipos
-- **Tailwind CSS 3.3** - Framework CSS utility-first
-- **HeroUI** - Biblioteca de UI React bonita, rápida e moderna
-- **Prisma 5.12** - ORM de nova geração para TypeScript & Node.js
+- **Next.js 16.3** - Framework React para produção
+- **React 19.3** - Biblioteca para interfaces baseadas em componentes
+- **TypeScript 5.9** - JavaScript com sintaxe para tipos
+- **Tailwind CSS 4.3** - Framework CSS utility-first
+- **HeroUI 3.2** - Biblioteca de UI React bonita, rápida e moderna
+- **Prisma 5.22** - ORM de nova geração para TypeScript & Node.js
 - **PostgreSQL 15** - Banco de dados relacional poderoso e open-source
 - **Docker** - Plataforma para aplicações containerizadas
 - **Argon2id** - Hash de senhas
 - **Sessões Opacas** - Gerenciamento de sessão persistido no banco
+- **Zod** - Validação em runtime e contratos de API compartilhados
+- **Bun** - Gerenciador de pacotes e runtime
 
 ## Começando
 
@@ -110,6 +113,8 @@ Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver se
 - `bun run migrate` - Executa as migrações do Prisma
 - `bun run migrate:reset` - Reseta o banco de dados e executa as migrações
 - `bun run prisma:studio` - Abre o Prisma Studio (GUI do banco de dados)
+- `bun run security:audit` - Audita dependências com vulnerabilidades conhecidas
+- `bun run check:production` - Verifica formatação, lint, tipos e build de produção
 
 ## Estrutura do Projeto
 
@@ -128,13 +133,12 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 │   │   ├── auth/         # Componentes relacionados à autenticação
 │   │   ├── home/         # Componentes da página inicial
 │   │   └── profile/      # Componentes da página de perfil
-│   ├── features/         # Lógica de Negócio por Feature
-│   │   └── auth/        # Schemas e services server-only de autenticação
+│   ├── modules/          # Lógica de Negócio por Domínio
+│   │   └── auth/        # Schemas, services, sessões e tipos de autenticação
 │   ├── lib/             # Utilitários e Infraestrutura Compartilhados
-│   │   ├── utils/       # Funções utilitárias (validators, etc.)
-│   │   ├── auth.ts      # Utilitários de autenticação
-│   │   ├── db.ts        # Conexão com banco de dados (Prisma)
-│   │   └── password.ts  # Utilitários de hash de senha
+│   │   ├── api/         # Cliente tipado, resultados e respostas de API
+│   │   ├── auth/        # Utilitários de cookie e hash de senha
+│   │   └── db.ts        # Conexão com banco de dados (Prisma)
 │   └── proxy.ts         # Proxy de proteção de rotas
 ├── prisma/
 │   └── schema.prisma    # Schema do banco de dados
@@ -144,7 +148,7 @@ Este projeto segue princípios de clean architecture com uma estrutura bem organ
 **Princípios Chave:**
 
 - **kebab-case**: Todos os arquivos e pastas usam nomenclatura kebab-case
-- **Baseado em features**: Lógica de negócio organizada por domínio (auth, users, etc.)
+- **Baseado em módulos**: Lógica de negócio organizada por domínio (auth, organizations, etc.)
 - **Separação limpa**: Componentes UI separados da lógica de negócio
 - **Barrel exports**: Cada pasta tem index.ts para imports limpos
 
@@ -200,32 +204,34 @@ O template usa componentes HeroUI com Tailwind CSS. Você pode customizar:
 
 A estrutura do projeto facilita a adição de novas funcionalidades:
 
-1. **Crie um service da feature** em `src/features/sua-feature/`:
+1. **Crie um service do módulo** em `src/modules/seu-modulo/`:
 
 ```typescript
-// src/features/produtos/service.ts
+// src/modules/produtos/product-service.ts
 import "server-only"
 import db from "@/lib/db"
 
-export async function getProdutos() {
-	return await db.produto.findMany()
+export class ProductService {
+	static async list() {
+		return db.produto.findMany()
+	}
 }
 ```
 
-2. **Adicione exports** em `src/features/produtos/index.ts`:
+2. **Adicione exports** em `src/modules/produtos/index.ts`:
 
 ```typescript
-export { getProdutos } from "./service"
+export { ProductService } from "./product-service"
 ```
 
 3. **Exponha um Route Handler** em `src/app/api/produtos/route.ts`:
 
 ```typescript
 import { NextResponse } from "next/server"
-import { getProdutos } from "@/features/produtos"
+import { ProductService } from "@/modules/produtos"
 
 export async function GET() {
-	return NextResponse.json({ success: true, data: await getProdutos() })
+	return NextResponse.json({ success: true, data: await ProductService.list() })
 }
 ```
 
@@ -245,12 +251,12 @@ export function ListaProdutos({ produtos }) {
 
 ```typescript
 // src/app/produtos/page.tsx
-import { getProdutos } from "@/features/produtos"
+import { ProductService } from "@/modules/produtos"
 import { ListaProdutos } from "@/components/produtos"
 
 export default async function PaginaProdutos() {
-  const produtos = await getProdutos()
-  return <ListaProdutos produtos={produtos} />
+	const produtos = await ProductService.list()
+	return <ListaProdutos produtos={produtos} />
 }
 ```
 
@@ -269,7 +275,7 @@ A clean architecture permite imports intuitivos:
 
 ```typescript
 // Cliente de API tipado
-import { ApiClient } from "@/lib/api-client"
+import { ApiClient } from "@/lib/api/api-client"
 
 // Componentes
 import { LoginForm, RegisterForm } from "@/components/auth"

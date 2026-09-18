@@ -25,16 +25,18 @@ A modern, production-ready fullstack Next.js template with authentication, datab
 
 ## Technologies
 
-- **Next.js 16** - React framework for production
-- **TypeScript 5** - JavaScript with syntax for types
-- **Tailwind CSS 3.3** - Utility-first CSS framework
-- **HeroUI** - Beautiful, fast and modern React UI library
-- **Prisma 5.12** - Next-generation ORM for TypeScript & Node.js
+- **Next.js 16.3** - React framework for production
+- **React 19.3** - UI library for building component-based interfaces
+- **TypeScript 5.9** - JavaScript with syntax for types
+- **Tailwind CSS 4.3** - Utility-first CSS framework
+- **HeroUI 3.2** - Beautiful, fast and modern React UI library
+- **Prisma 5.22** - Next-generation ORM for TypeScript & Node.js
 - **PostgreSQL 15** - Powerful, open-source relational database
 - **Docker** - Platform for containerized applications
 - **Argon2id** - Password hashing
 - **Opaque Sessions** - Database-backed session management
 - **Zod** - Runtime validation and shared API contracts
+- **Bun** - Package manager and runtime
 
 ## Getting Started
 
@@ -111,6 +113,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see your 
 - `bun run migrate` - Run Prisma migrations
 - `bun run migrate:reset` - Reset database and run migrations
 - `bun run prisma:studio` - Open Prisma Studio (database GUI)
+- `bun run security:audit` - Audit dependencies for known vulnerabilities
+- `bun run check:production` - Check formatting, linting, types, and production build
 
 ## Project Structure
 
@@ -132,10 +136,9 @@ This project follows clean architecture principles with a well-organized structu
 │   ├── modules/          # Business Logic by Domain
 │   │   └── auth/        # Authentication schemas, services, sessions and types
 │   ├── lib/             # Shared Utilities & Infrastructure
-│   │   ├── utils/       # Utility functions (validators, etc.)
-│   │   ├── auth.ts      # Authentication utilities
-│   │   ├── db.ts        # Database connection (Prisma)
-│   │   └── password.ts  # Password hashing utilities
+│   │   ├── api/         # Typed API client, results, and responses
+│   │   ├── auth/        # Cookie and password utilities
+│   │   └── db.ts        # Database connection (Prisma)
 │   └── proxy.ts         # Route protection proxy
 ├── prisma/
 │   └── schema.prisma    # Database schema
@@ -145,7 +148,7 @@ This project follows clean architecture principles with a well-organized structu
 **Key Principles:**
 
 - **kebab-case**: All files and folders use kebab-case naming
-- **Feature-based**: Business logic organized by domain (auth, users, etc.)
+- **Module-based**: Business logic organized by domain (auth, organizations, etc.)
 - **Clean separation**: UI components separated from business logic
 - **Barrel exports**: Each folder has index.ts for clean imports
 
@@ -272,7 +275,7 @@ The clean architecture allows for intuitive imports:
 
 ```typescript
 // Typed API client
-import { ApiClient } from "@/lib/api-client"
+import { ApiClient } from "@/lib/api/api-client"
 
 // Components
 import { LoginForm, RegisterForm } from "@/components/auth"
